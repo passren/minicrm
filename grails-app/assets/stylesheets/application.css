@@ -1,0 +1,141 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS file within this directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the top of the
+* compiled file, but it's generally better to create a new file per style scope.
+*
+*= require main
+*= require mobile
+*= require_self
+*/
+
+/* Menu */
+#menu {
+	background-color: #eee;
+	border: .2em solid #fff;
+	margin: 2em 2em 1em;
+	padding: 1em;
+	width: 12em;
+	float: left;
+	-moz-box-shadow: 0px 0px 1.25em #ccc;
+	-webkit-box-shadow: 0px 0px 1.25em #ccc;
+	box-shadow: 0px 0px 1.25em #ccc;
+	-moz-border-radius: 0.6em;
+	-webkit-border-radius: 0.6em;
+	border-radius: 0.6em;
+}
+
+.ie6 #menu {
+	display: inline; /* float double margin fix http://www.positioniseverything.net/explorer/doubled-margin.html */
+}
+
+#menu ul {
+	font-size: 0.8em;
+	list-style-type: none;
+	margin-bottom: 0.6em;
+	padding: 0;
+}
+
+#menu li {
+	line-height: 1.6;
+}
+
+#menu h1 {
+	color: #0080c0;
+	text-transform: uppercase;
+	font-size: 0.9em;
+	font-weight: bold;
+	margin: 0 0 0.5em;
+}
+
+#page-body {
+	margin: 1em 1em 1em 18em;
+}
+
+h2 {
+	margin-top: 0.1em;
+	margin-bottom: 0.1em;
+	font-size: 0.2em;
+}
+
+p {
+	line-height: 1.5;
+	margin: 0.25em 0;
+}
+
+/* LIST */
+
+.list {
+	margin: 1.0em 0.25em 0.25em 0.25em;
+	vertical-align: top;
+}
+
+.list table {
+	border: 1px solid #DFDFDF;
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 1em;
+}
+.list th, .list td {
+	font-size: 0.8em;
+	line-height: 1.5em;
+	padding: 0.5em 0.6em;
+	text-align: left;
+	vertical-align: top;
+}
+.list th {
+	background-color: #efefef;
+	background-image: -moz-linear-gradient(top, #ffffff, #eaeaea);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(1, #eaeaea));
+	    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#ffffff', EndColorStr = '#eaeaea');
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#eaeaea')";
+	color: #666666;
+	font-weight: bold;
+	line-height: 1.7em;
+	padding: 0.2em 0.6em;
+}
+.list tr>td:first-child, .list tr>th:first-child {
+	padding-left: 1.25em;
+}
+.list tr>td:last-child, .list tr>th:last-child {
+	padding-right: 1.25em;
+}
+.list th:hover, .list tr:hover {
+    background: #b2d1ff;
+}
+
+/* PAGINATION */
+
+.paginate {
+    border-top: 0;
+    color: #666;
+    font-size: 0.7em;
+    padding: 0.1em 0em;
+}
+.paginate a {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-color: #ccc #aaa #aaa #ccc;
+    color: #666;
+    padding: 2px 6px;
+}
+.paginate span {
+    padding: 2px 3px;
+}
+
+.toolbar {
+	padding: 0.4em 0.6em;
+	background: #eee;
+	-moz-border-radius: 0.2em;
+	-webkit-border-radius: 0.2em;
+	border-radius: 0.2em;
+}
+.toolbar a {
+	color: #5656ce;
+	font-size: 0.9em;
+	font-weight: bold;
+	margin: 0em 0.5em 0em 0em;
+}
