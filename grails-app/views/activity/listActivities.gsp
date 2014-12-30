@@ -17,6 +17,10 @@ $(document).ready(function(){
 
 </head>
 <body>
+    <div class="toolbar">
+            <g:link action="addActivity">创建活动</g:link>
+    </div>
+    
   <h1>销售活动 > 活动列表</h1>
   <g:if test="${flash.message}">
     <div class="message">${flash.message}</div>
@@ -54,10 +58,6 @@ $(document).ready(function(){
   			</tbody>
   		</table>
   		</g:form>
-  	</div>
-  	
-  	<div class="toolbar">
-  		<g:link action="addActivity">创建活动</g:link>
   	</div>
   	
   	<div class="list">

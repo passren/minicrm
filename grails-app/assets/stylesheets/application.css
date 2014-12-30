@@ -69,7 +69,7 @@ p {
 /* LIST */
 
 .list {
-	margin: 1.0em 0.25em 0.25em 0.25em;
+        padding: 1.0em 0.4em;
 	vertical-align: top;
 }
 

@@ -19,6 +19,10 @@ $(document).ready(function(){
 
 </head>
 <body>
+    <div class="toolbar">
+            <g:link action="addCustomer">创建客户</g:link>
+    </div>
+    
   <h1>客户管理 > 客户列表</h1>
   <g:if test="${flash.message}">
     <div class="message">${flash.message}</div>
@@ -77,10 +81,6 @@ $(document).ready(function(){
   			</tbody>
   		</table>
   		</g:form>
-  	</div>
-  	
-  	<div class="toolbar">
-  		<g:link action="addCustomer">创建客户</g:link>
   	</div>
   	
   	<div class="list">

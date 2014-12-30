@@ -8,7 +8,9 @@
 <body>
   <div class="body">
 	<div class="toolbar">
-		<g:link action="listCustomers">返回</g:link>
+            <g:link action="listCustomers">返回</g:link>
+            <g:link action="updateCustomer" id="${customer.id}">更新客户信息</g:link>
+            <g:link action="addContact" id="${customer.id}">创建联系人</g:link>
 	</div>
   
   	<h1>客户管理 > 客户信息</h1>
@@ -69,10 +71,6 @@
   				</tr>
   			</tbody>
   		</table>
-  	</div>
-  	<div class="toolbar">
-	  	<g:link action="updateCustomer" id="${customer.id}">更新客户信息</g:link>
-	  	<g:link action="addContact" id="${customer.id}">创建联系人</g:link>
   	</div>
   	
   	<div class="list">

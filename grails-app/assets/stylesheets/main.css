@@ -80,9 +80,9 @@ a:hover, a:active {
 
 h1 {
 	color: #48802c;
-	font-weight: normal;
-	font-size: 1.0em;
-	margin: 0.8em 0 0.3em 0;
+	font-weight: bold;
+	font-size: 0.9em;
+	margin: 0.9em 0 0.9em 0;
 }
 
 ul {
@@ -419,8 +419,8 @@ input:invalid:focus, select:invalid:focus, textarea:invalid:focus {
 table {
 	border-top: 1px solid #DFDFDF;
 	border-collapse: collapse;
-	width: 100%;
-	margin-bottom: 1em;
+	width: 98%;
+	margin-bottom: 0.5em;
 }
 
 tr {
