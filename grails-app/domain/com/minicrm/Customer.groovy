@@ -10,6 +10,7 @@ class Customer {
 	ValueSet classification
 	ValueSet source
 	ValueSet status
+        ValueSet situation
 	Date createdDate
 	User createUser
 	Date lastUpdatedDate
@@ -32,6 +33,7 @@ class Customer {
 		remark nullable: true
 		classification nullable: true
 		source nullable: true
+                situation nullable: true
 		status nullable: false
 		createdDate nullable: false
 		createUser nullable: false

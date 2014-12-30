@@ -57,15 +57,18 @@
   					<td><label for="cellphone">手机</label>
   						<g:textField name="cellphone" value="${contact.cellphone}" size="15" readonly="true"/>
   					</td>
+                                        <td><label for="qq">QQ</label>
+  						<g:textField name="qq" value="${contact.qq}" size="15" readonly="true"/>
+  					</td>
   					<td><label for="email">邮箱</label>
   						<g:textField name="email" value="${contact.email}" size="15" readonly="true"/>
   					</td>
-  					<td><label for="status">状态</label>
-  						<g:textField name="status" value="${contact.status?.code1}" size="15" readonly="true"/>
-  					</td>
   				</tr>
   				<tr>
-  					<td colspan="4"><label for="remark">备注</label>
+                                        <td><label for="status">状态</label>
+  						<g:textField name="status" value="${contact.status?.code1}" size="15" readonly="true"/>
+  					</td>
+  					<td colspan="3"><label for="remark">备注</label>
 						<g:textField name="remark" value="${contact.remark}" size="80" readonly="true"/>
   					</td>
   				</tr>

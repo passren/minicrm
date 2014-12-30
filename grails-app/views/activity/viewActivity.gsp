@@ -8,8 +8,8 @@
 <body>
   <div class="body">
 	<div class="toolbar">
-		<g:link action="listActivities">返回</g:link>
-		<g:link action="updateActivity" id="${activity.id}">更新活动</g:link>
+            <g:link action="listActivities">返回</g:link>
+            <g:link action="updateActivity" id="${activity.id}">更新活动</g:link>
 	</div>
 	
   	<h1>销售活动 > 活动信息</h1>
@@ -25,7 +25,7 @@
   				<tr>
   					<td colspan="4"><label for="customerName">客户名称</label>
   						<g:textField name="customerName" value="${activity.customer.name}" size="40" readonly="true"/>
-						<g:link action="viewCustomer" id="${activity.customer.id}" target="_blank">客户信息</g:link>
+						<g:link controller="customer" action="viewCustomer" id="${activity.customer.id}" target="_blank">客户信息</g:link>
   					</td>
   				</tr>
   				<tr>
@@ -51,6 +51,20 @@
   					<td colspan="4"><label for="remark">备注信息</label>
 						<g:textField name="remark" value="${activity.remark}" size="80" readonly="true"/>
   					</td>
+  				</tr>
+                                <tr>
+  					<td><label for="contact.createdDate">创建日期</label>
+  						<g:formatDate format="yyyy-MM-dd HH:mm:SS" date="${activity.createdDate}"/>
+  					</td>
+  					<td><label for="contact.createUser">创建人员</label>
+  						${activity.createUser.realname}
+  					</td>
+  					<td><label for="contact.lastUpdatedDate">更新日期</label>
+						<g:formatDate format="yyyy-MM-dd HH:mm:SS" date="${activity.lastUpdatedDate}"/>
+					</td>
+  					<td><label for="contact.lastUpdateUser">更新人员</label>
+						${activity.lastUpdateUser.realname}
+					</td>
   				</tr>
   	    	</tbody>
   	    </table>

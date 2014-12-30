@@ -81,10 +81,15 @@ $(document).ready(function(){
   					<td><label for="cellphone">手机</label>
   						<g:textField name="cellphone" value="${contact?.cellphone}" size="15"/>
   					</td>
+                                        <td><label for="qq">QQ</label>
+  						<g:textField name="qq" value="${contact?.qq}" size="15"/>
+  					</td>
   					<td><label for="email">邮箱</label>
   						<g:textField name="email" value="${contact?.email}" size="15"/>
   					</td>
-  					<td><label for="status">状态</label>
+  				</tr>
+                                <tr>
+                                  	<td><label for="status">状态</label>
 	  					<g:select name="status"
 						          from="${status}"
 						          value="${contact?.status?.id}"
@@ -93,12 +98,10 @@ $(document).ready(function(){
 						          noSelection="['':'']"
 						          />
   					</td>
-  				</tr>
-  				<tr>
-  					<td colspan="4"><label for="remark">备注信息</label>
+                                        <td colspan="3"><label for="remark">备注信息</label>
 						<g:textField name="remark" value="${contact?.remark}" size="80"/>
   					</td>
-  				</tr>
+                                </tr>
   	    	</tbody>
   	    </table>
   	  </g:form>

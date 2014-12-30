@@ -10,65 +10,22 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#linkBack").click(function(){
-		if(!confirm("尚未保存,确认返回？")) return false;
-		location="<g:createLink action='listActivities'/>";
+            if(!confirm("尚未保存,确认返回？")) return false;
+            location="<g:createLink action='listActivities'/>";
 	});
 	
 	$("#linkSaveForm").click(function(){
-		$("#formActivity").submit();
+            $("#formActivity").submit();
 	});
 
 	$("#btnSearchCustomer").click(function(){
-		if($("#search_customer_name").val().trim() == "") {
-			return;
-		}
-
-		$.ajax({
-			type: "Get",
-			url: "${createLink(controller:'customer', action:'getCustomersAsJson', absolute:true)}",
-			data: "search_customer_name="+$("#search_customer_name").val(),
-			success: function(data) {
-				var obj = eval(data);
-				$("#selCustomers").empty();
-
-				if (obj.length == 0) {
-					alert("没有查询到符合的记录!");
-				} else {
-					$.each(obj, function (n, value) {
-						var option = "<option value='"+value.id+"'>"+value.name+"</option>";
-						$("#selCustomers").append(option);
-					});
-				}
-			},
-			error: function(result, status) {
-			}
-		});
+            var url = "${createLink(controller:'customer', action:'getCustomersAsJson', absolute:true)}";
+            searchCustomer(url);
 	});
 
 	$("#linkSearchCustomer").click(function(){
-		var dialog = $("#dialog-form").dialog({
-			autoOpen: false,
-			width: 400,
-			modal: true,
-			buttons: {
-				"选择": function(){
-					if($("#selCustomers").find("option:selected").val()) {
-						$("#customerId").val($("#selCustomers").find("option:selected").val());
-						$("#customerName").val($("#selCustomers").find("option:selected").text());
-						dialog.dialog("close");
-					}
-				}, 
-				"取消": function(){
-					dialog.dialog("close");
-				}
-			},
-			close: function(){
-			}
-		});
-
-		$("#search_customer_name").val("");
-		$("#selCustomers").empty();
-		dialog.dialog("open");
+            var divDialog = "#dialog-form";
+            openCustomerSearchDialog(divDialog);
 	});
 });
 </script>

@@ -24,12 +24,24 @@ class ValueSetService {
 	def Set<ValueSet> getCustomerSource() {
 		getByCategory(ConstUtils.CUSTOMER_SOURCE)
 	}
-	
+        
+        def Set<ValueSet> getCustomerSituation() {
+            getByCategory(ConstUtils.CUSTOMER_SITUATION)
+        }
+        
 	def Set<ValueSet> getCustomerStatus() {
 		getByCategory(ConstUtils.CUSTOMER_STATUS)
 	}
 	
 	def Set<ValueSet> getActivityType() {
 		getByCategory(ConstUtils.ACTIVITY_TYPE)
+	}
+        
+        def Set<ValueSet> getProductList() {
+		getByCategory(ConstUtils.PRODUCT)
+	}
+        
+        def Set<ValueSet> getOpportunityStatus() {
+		getByCategory(ConstUtils.OPPORTUNITY_STATUS)
 	}
 }

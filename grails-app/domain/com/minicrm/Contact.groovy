@@ -9,6 +9,7 @@ class Contact {
 	String position
 	String deskphone
 	String cellphone
+        String qq
 	String email
 	String remark
 	ValueSet status
@@ -31,6 +32,7 @@ class Contact {
 		position nullable:true
 		deskphone nullable:true
 		cellphone nullable:true
+                qq nullable:true
 		email nullable:true, email:true
 		remark nullable:true
 		status nullable: false

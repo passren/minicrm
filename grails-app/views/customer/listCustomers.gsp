@@ -20,67 +20,68 @@ $(document).ready(function(){
 </head>
 <body>
     <div class="toolbar">
-            <g:link action="addCustomer">创建客户</g:link>
+        <g:link action="addCustomer">创建客户</g:link>
     </div>
     
-  <h1>客户管理 > 客户列表</h1>
-  <g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
-  </g:if>
-  <div class="body">
+    <h1>客户管理 > 客户列表</h1>
+    <g:if test="${flash.message}">
+        <div class="message">${flash.message}</div>
+    </g:if>
+    
+    <div class="body">
   	<div class="search">
-  		<g:form name="formSearch" method="post" action="listCustomers">
-  		<table>
-  			<thead>
-  			</thead>
-  			<tbody>
-  				<tr>
-  					<td colspan="2">客户名称
-  						<g:textField name="search_customer_name" value="${searchCriteria?.search_customer_name}" size="30"/>
-  					</td>
-  					<td colspan="2">客户区域
-  						<g:select name="search_customer_province"
-					          from="${provinces}"
-					          value="${searchCriteria?.search_customer_province}"
-					          optionKey="id"
-					          optionValue="name"
-					          noSelection="['':'-请选择-']"
-					          />
-  					</td>
-  				</tr>
-  				<tr>
-  					<td>客户类型 
-  						<g:select name="search_customer_category"
-					          from="${categories}"
-					          value="${searchCriteria?.search_customer_category}"
-					          optionKey="id" 
-					          optionValue="code1"
-					          noSelection="['':'-请选择-']"/>
-	          		</td>
-	          		<td>客户定级
-	         			<g:select name="search_customer_classification"
-					          from="${classifications}"
-					          value="${searchCriteria?.search_customer_classification}"
-					          optionKey="id" 
-					          optionValue="code1"
-					          noSelection="['':'-请选择-']"/>
-	          		</td>
-	          		<td>客户来源
-	          			<g:select name="search_customer_source"
-					          from="${sources}"
-					          value="${searchCriteria?.search_customer_source}"
-					          optionKey="id" 
-					          optionValue="code1"
-					          noSelection="['':'-请选择-']"/>
-	          		</td>
-	          		<td>
-	          			<g:submitButton name="btnSeachCustomer" value="查询" />
-	          			<input id="btnClearCriteria" name="btnClearCriteria" type="button" value="清除"/>
-	          		</td>
-  				</tr>
-  			</tbody>
-  		</table>
-  		</g:form>
+            <g:form name="formSearch" method="post" action="listCustomers">
+            <table>
+                <thead>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2">客户名称
+                            <g:textField name="search_customer_name" value="${searchCriteria?.search_customer_name}" size="30"/>
+                        </td>
+                        <td colspan="2">客户区域
+                            <g:select name="search_customer_province"
+                              from="${provinces}"
+                              value="${searchCriteria?.search_customer_province}"
+                              optionKey="id"
+                              optionValue="name"
+                              noSelection="['':'-请选择-']"
+                              />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>客户类型 
+                                <g:select name="search_customer_category"
+                                  from="${categories}"
+                                  value="${searchCriteria?.search_customer_category}"
+                                  optionKey="id" 
+                                  optionValue="code1"
+                                  noSelection="['':'-请选择-']"/>
+                        </td>
+                        <td>客户定级
+                            <g:select name="search_customer_classification"
+                                      from="${classifications}"
+                                      value="${searchCriteria?.search_customer_classification}"
+                                      optionKey="id" 
+                                      optionValue="code1"
+                                      noSelection="['':'-请选择-']"/>
+                        </td>
+                        <td>客户来源
+                            <g:select name="search_customer_source"
+                                      from="${sources}"
+                                      value="${searchCriteria?.search_customer_source}"
+                                      optionKey="id" 
+                                      optionValue="code1"
+                                      noSelection="['':'-请选择-']"/>
+                        </td>
+                        <td>
+                            <g:submitButton name="btnSeachCustomer" value="查询" />
+                            <input id="btnClearCriteria" name="btnClearCriteria" type="button" value="清除"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </g:form>
   	</div>
   	
   	<div class="list">
@@ -89,10 +90,11 @@ $(document).ready(function(){
 			<tr>
 				<th style="width: 2%">序号</th>
 				<th style="width: 30%">客户名称</th>
-				<th style="width: 50%">客户地址</th>
+				<th style="width: 45%">客户地址</th>
 				<th style="width: 5%">客户类型</th>
 				<th style="width: 5%">客户定级</th>
 				<th style="width: 5%">客户来源</th>
+                                <th style="width: 5%">最终情况</th>
 				<th style="width: 2%">创建日期</th>
 				<th style="width: 2%">更新日期</th>
 				<th style="width: 2%">状态</th>
@@ -117,6 +119,7 @@ $(document).ready(function(){
 					<td>${customer.category?.code1}</td>
 					<td>${customer.classification?.code1}</td>
 					<td>${customer.source?.code1}</td>
+                                        <td>${customer.situation?.code1}</td>
 					<td><g:formatDate format="yyyy-MM-dd" date="${customer.createdDate}"/></td>
 					<td><g:formatDate format="yyyy-MM-dd" date="${customer.lastUpdatedDate}"/></td>
 					<td>${customer.status?.code1}</td>

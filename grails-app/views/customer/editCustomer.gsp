@@ -124,10 +124,10 @@ $(document).ready(function(){
 					          noSelection="['':'']"
 					          />
 	          		</td>
-	          		<td><label for="status">客户状态</label>
-	          			<g:select name="status"
-					          from="${status}"
-					          value="${customer?.status?.id}"
+                                <td><label for="situation">客户来源</label>
+				  		<g:select name="situation"
+					          from="${situation}"
+					          value="${customer?.situation?.id}"
 					          optionKey="id"
 					          optionValue="code1"
 					          noSelection="['':'']"
@@ -135,7 +135,16 @@ $(document).ready(function(){
 	          		</td>
   				</tr>
   				<tr>
-  					<td colspan="4"><label for="remark">备注信息</label>
+                                        <td><label for="status">客户状态</label>
+	          			<g:select name="status"
+					          from="${status}"
+					          value="${customer?.status?.id}"
+					          optionKey="id"
+					          optionValue="code1"
+					          noSelection="['':'']"
+					          />
+                                        </td>
+  					<td colspan="3"><label for="remark">备注信息</label>
 						<g:textField name="remark" value="${customer?.remark}" size="80"/>
   					</td>
   				</tr>

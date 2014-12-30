@@ -46,12 +46,15 @@
 	          		<td><label for="customer.source">客户来源</label>
 	          			<g:textField name="customer.source" value="${customer.source?.code1}" size="15" readonly="true"/>
 	          		</td>
-	          		<td><label for="customer.status">客户状态</label>
-						<g:textField name="customer.status" value="${customer.status?.code1}" size="15" readonly="true"/>
+                                <td><label for="customer.source">最终情况</label>
+	          			<g:textField name="customer.situation" value="${customer.situation?.code1}" size="15" readonly="true"/>
 	          		</td>
   				</tr>
   				<tr>
-  					<td colspan="4"><label for="customer.remark">客户备注</label>
+                                        <td><label for="customer.status">客户状态</label>
+                                                <g:textField name="customer.status" value="${customer.status?.code1}" size="15" readonly="true"/>
+                                        </td>
+  					<td colspan="3"><label for="customer.remark">客户备注</label>
 						<g:textField name="customer.remark" value="${customer.remark}" size="80" readonly="true"/>
   					</td>
   				</tr>
@@ -81,8 +84,9 @@
 			        <g:sortableColumn property="name" title="联系人" style="width: 20%"/>
 			        <g:sortableColumn property="department" title="部门" style="width: 10%"/>
 			        <g:sortableColumn property="position" title="职位" style="width: 10%"/>
-			        <g:sortableColumn property="deskphone" title="座机" style="width: 15%"/>
-			        <g:sortableColumn property="cellphone" title="手机" style="width: 15%"/>
+			        <g:sortableColumn property="deskphone" title="座机" style="width: 10%"/>
+			        <g:sortableColumn property="cellphone" title="手机" style="width: 10%"/>
+                                <g:sortableColumn property="qq" title="QQ" style="width: 10%"/>
 			        <g:sortableColumn property="email" title="邮件" style="width: 15%"/>
 			        <g:sortableColumn property="createdDate" title="创建日期" style="width: 5%"/>
 			        <g:sortableColumn property="lastUpdatedDate" title="更新日期" style="width: 5%"/>
@@ -98,6 +102,7 @@
 						<td>${contact.position?.encodeAsHTML()}</td>
 						<td>${contact.deskphone?.encodeAsHTML()}</td>
 						<td>${contact.cellphone?.encodeAsHTML()}</td>
+                                                <td>${contact.qq?.encodeAsHTML()}</td>
 						<td>${contact.email?.encodeAsHTML()}</td>
 						<td><g:formatDate format="yyyy-MM-dd" date="${customer.createdDate}"/></td>
 						<td><g:formatDate format="yyyy-MM-dd" date="${customer.lastUpdatedDate}"/></td>

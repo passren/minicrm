@@ -14,9 +14,12 @@ class ConstUtils {
 	
 	public static final CUSTOMER_CATEGORY = "CUSTOMER_CATEGORY"
 	public static final CUSTOMER_CLASSIFICATION = "CUSTOMER_CLASSIFICATION"
-	public static final CUSTOMER_SOURCE = "CUSTOMER_SOURCE"
+	public static final CUSTOMER_SITUATION = "CUSTOMER_SITUATION"
+        public static final CUSTOMER_SOURCE = "CUSTOMER_SOURCE"
 	public static final CUSTOMER_STATUS = "CUSTOMER_STATUS"
 	public static final ACTIVITY_TYPE = "ACTIVITY_TYPE"
+        public static final PRODUCT = "PRODUCT"
+        public static final OPPORTUNITY_STATUS = "OPPORTUNITY_STATUS"
 	
 	public static final PAGE_MAX_RECORDS = 10
 

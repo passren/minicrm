@@ -27,69 +27,69 @@ $(document).ready(function(){
   </g:if>
 
   <div class="body">
-  	<div class="search">
-  		<g:form name="formSearch" method="post" action="listActivities">
-  		<table>
-  			<thead>
-  			</thead>
-  			<tbody>
-  				<tr>
-  					<td colspan="4">客户名称
-  						<g:textField name="search_activity_customer_name" value="${searchCriteria?.search_activity_customer_name}" size="30"/>
-  					</td>
-  				</tr>
-  				<tr>
-  					<td colspan="2">活动概要
-  						<g:textField name="search_activity_summary" value="${searchCriteria?.search_activity_summary}" size="30"/>
-  					</td>
-  					<td>活动类型
-  						<g:select name="search_activity_type"
-					          from="${activityTypes}"
-					          value="${searchCriteria?.search_activity_type}"
-					          optionKey="id" 
-					          optionValue="code1"
-					          noSelection="['':'-请选择-']"/>
-  					</td>
-  					<td>
-  						<g:submitButton name="btnSeachCustomer" value="查询" />
-	          			<input id="btnClearCriteria" name="btnClearCriteria" type="button" value="清除"/>
-  					</td>
-  				</tr>
-  			</tbody>
-  		</table>
-  		</g:form>
-  	</div>
+    <div class="search">
+        <g:form name="formSearch" method="post" action="listActivities">
+        <table>
+            <thead>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4">客户名称
+                            <g:textField name="search_activity_customer_name" value="${searchCriteria?.search_activity_customer_name}" size="30"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">活动概要
+                        <g:textField name="search_activity_summary" value="${searchCriteria?.search_activity_summary}" size="30"/>
+                    </td>
+                    <td>活动类型
+                        <g:select name="search_activity_type"
+                              from="${activityTypes}"
+                              value="${searchCriteria?.search_activity_type}"
+                              optionKey="id" 
+                              optionValue="code1"
+                              noSelection="['':'-请选择-']"/>
+                    </td>
+                    <td>
+                        <g:submitButton name="btnSeachCustomer" value="查询" />
+                        <input id="btnClearCriteria" name="btnClearCriteria" type="button" value="清除"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </g:form>
+    </div>
   	
-  	<div class="list">
-  	<table id="activityList">
-       	<thead>
-			<tr>
-				<th style="width: 2%">序号</th>
-				<th style="width: 30%">客户名称</th>
-				<th style="width: 50%">活动概要</th>
-				<th style="width: 8%">活动类型</th>
-				<th style="width: 5%">创建日期</th>
-				<th style="width: 5%">更新日期</th>
-	        </tr>
+    <div class="list">
+    <table id="activityList">
+        <thead>
+            <tr>
+                <th style="width: 2%">序号</th>
+                <th style="width: 50%">活动概要</th>
+                <th style="width: 30%">客户名称</th>
+                <th style="width: 8%">活动类型</th>
+                <th style="width: 5%">创建日期</th>
+                <th style="width: 5%">更新日期</th>
+            </tr>
         </thead>
-		<tbody>
-			<g:each in="${activities}" status="i" var="activity">
-				<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-					<td>${i+1}</td>
-					<td><g:link controller="customer" action="viewCustomer" id="${activity.customer.id}">${activity.customer.name?.encodeAsHTML()}</g:link></td>
-					<td><g:link action="viewActivity" id="${activity.id}">${activity.summary?.encodeAsHTML()}</g:link></td>
-					<td>${activity.type?.code1}</td>
-					<td><g:formatDate format="yyyy-MM-dd" date="${activity.createdDate}"/></td>
-					<td><g:formatDate format="yyyy-MM-dd" date="${activity.lastUpdatedDate}"/></td>
-				</tr>
-	       </g:each>
-       </tbody>
-	</table>
-  	</div>
-  	
-  	<div class="paginate">
+        <tbody>
+            <g:each in="${activities}" status="i" var="activity">
+                <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                    <td>${i+1}</td>
+                    <td><g:link action="viewActivity" id="${activity.id}">${activity.summary?.encodeAsHTML()}</g:link></td>
+                    <td><g:link controller="customer" action="viewCustomer" id="${activity.customer.id}">${activity.customer.name?.encodeAsHTML()}</g:link></td>
+                    <td>${activity.type?.code1}</td>
+                    <td><g:formatDate format="yyyy-MM-dd" date="${activity.createdDate}"/></td>
+                    <td><g:formatDate format="yyyy-MM-dd" date="${activity.lastUpdatedDate}"/></td>
+                </tr>
+            </g:each>
+        </tbody>
+    </table>
+    </div>
 
-  	</div>
+    <div class="paginate">
+
+    </div>
   </div>
 </body>
 </html>
