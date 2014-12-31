@@ -124,16 +124,28 @@ log4j.main = {
 grails {
     plugin {
         springsecurity {
-            password.algorithm='bcrypt'
             userLookup.userDomainClassName = 'com.minicrm.User'
             userLookup.authorityJoinClassName = 'com.minicrm.UserRole'
             authority.className = 'com.minicrm.Role'
-            authority.groupAuthorityNameField = 'authorities'
-            useRoleGroups = true
-            securityConfigType = "Requestmap"
-            requestMap.className = 'com.minicrm.Requestmap'
-            rejectIfNoRule = false
-            fii.rejectPublicInvocations = false
+            securityConfigType = "InterceptUrlMap"
+			interceptUrlMap = [
+				'/':                  ['permitAll'],
+				'/index':             ['permitAll'],
+				'/index.gsp':         ['permitAll'],
+				'/assets/**':         ['permitAll'],
+				'/**/js/**':          ['permitAll'],
+				'/**/css/**':         ['permitAll'],
+				'/**/images/**':      ['permitAll'],
+				'/**/favicon.ico':    ['permitAll'],
+				'/login/**':          ['permitAll'],
+				'/logout/**':         ['permitAll'],
+				'/admin/**':          [com.minicrm.ConstUtils.ROLE_ADMIN],
+				'/customer/**':          [com.minicrm.ConstUtils.ROLE_SALES, 'IS_AUTHENTICATED_REMEMBERED'],
+				'/activity/**':          [com.minicrm.ConstUtils.ROLE_SALES, 'IS_AUTHENTICATED_REMEMBERED'],
+				'/opportunity/**':       [com.minicrm.ConstUtils.ROLE_SALES, 'IS_AUTHENTICATED_REMEMBERED'],
+				'/serviceRequest/**':    [com.minicrm.ConstUtils.ROLE_SALES, 'IS_AUTHENTICATED_REMEMBERED']
+			]
         }
     }
 }
+

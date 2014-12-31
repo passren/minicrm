@@ -12,9 +12,9 @@ class ConstUtils {
     public static final CONTROLLER_ACTION_FLAG_ADD = "A"
     public static final CONTROLLER_ACTION_FLAG_UPDATE = "U"
 
-    public static final ROLE_ADMIN = "ADMIN"
-    public static final ROLE_SALES_MANAGER = "SALES_MANAGER"
-    public static final ROLE_SALES = "SALES"
+    public static final ROLE_ADMIN = "ROLE_ADMIN"
+    public static final ROLE_SALES_MANAGER = "ROLE_SALES_MANAGER"
+    public static final ROLE_SALES = "ROLE_SALES"
 
     public static final CUSTOMER_CATEGORY = "CUSTOMER_CATEGORY"
     public static final CUSTOMER_CLASSIFICATION = "CUSTOMER_CLASSIFICATION"
@@ -25,6 +25,10 @@ class ConstUtils {
     public static final PRODUCT = "PRODUCT"
     public static final OPPORTUNITY_STATUS = "OPPORTUNITY_STATUS"
     public static final IMPLEMENT_STATUS = "IMPLEMENT_STATUS"
+	public static final RECEIPT_METHOD = "RECEIPT_METHOD"
+	public static final INVOICE_TYPE = "INVOICE_TYPE"
+	public static final SERVICE_CLASSIFICATION = "SERVICE_CLASSIFICATION"
+	public static final SERVICE_STATUS = "SERVICE_STATUS"
 
     public static final PAGE_MAX_RECORDS = 10
 

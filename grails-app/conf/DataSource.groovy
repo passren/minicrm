@@ -18,25 +18,25 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:h2:file:database/minicrmDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+//            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+//            url = "jdbc:h2:file:database/minicrmDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
             
-//            dbCreate = "update"
-//            pooled = true
-//			url = "jdbc:mysql://127.0.0.1:3306/minicrm-dev"
-//			driverClassName = "com.mysql.jdbc.Driver"
-//			dialect = org.hibernate.dialect.MySQL5InnoDBDialect
-//			username = "minicrm-dev"
-//			password = "minicrm-dev"
-//			properties {
-//				maxActive = 50
-//				maxIdle = 25
-//				minIdle = 5
-//				initialSize = 5
-//				minEvictableIdleTimeMillis = 60000
-//				timeBetweenEvictionRunsMillis = 60000
-//				maxWait = 10000
-//			}
+            dbCreate = "update"
+            pooled = true
+			url = "jdbc:mysql://127.0.0.1:3306/minicrm-dev"
+			driverClassName = "com.mysql.jdbc.Driver"
+			dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+			username = "minicrm-dev"
+			password = "minicrm-dev"
+			properties {
+				maxActive = 50
+				maxIdle = 25
+				minIdle = 5
+				initialSize = 5
+				minEvictableIdleTimeMillis = 60000
+				timeBetweenEvictionRunsMillis = 60000
+				maxWait = 10000
+			}
         }
     }
     test {

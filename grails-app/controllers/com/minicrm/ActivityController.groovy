@@ -70,4 +70,11 @@ class ActivityController {
                                                     activityTypes:valueSetService.getActivityType()])
         }
     }
+	
+	def deleteActivity() {
+		def activity = Activity.get(params.id)
+		
+		activity.delete(flush:true)
+		redirect(action:"listActivities")
+	}
 }

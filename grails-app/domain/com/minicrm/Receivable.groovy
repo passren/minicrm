@@ -21,8 +21,8 @@ class Receivable {
     
     static constraints = {
         receiptMethod nullable:false
-        receiptAmount nullable:false
-        receiptDate nullable:true
+        receiptAmount nullable:false, blank:false
+        receiptDate nullable:true, blank:false
         remark nullable:true
         opportunity nullable:false
         createdDate nullable: false

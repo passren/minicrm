@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 class ValueSetService {
 
     def Set<ValueSet> getByCategory(String category) {
-        ValueSet.findAllByCategory(category)
+        ValueSet.findAllByCategory(category, [sort:"code", order:"asc"])
     }
 	
     def ValueSet getByCode(String category,String code) {
@@ -48,4 +48,20 @@ class ValueSetService {
     def Set<ValueSet> getImplementStatus() {
         getByCategory(ConstUtils.IMPLEMENT_STATUS)
     }
+	
+	def Set<ValueSet> getReceiptMethod() {
+        getByCategory(ConstUtils.RECEIPT_METHOD)
+    }
+	
+	def Set<ValueSet> getInvoiceType() {
+		getByCategory(ConstUtils.INVOICE_TYPE)
+	}
+	
+	def Set<ValueSet> getServiceClass() {
+		getByCategory(ConstUtils.SERVICE_CLASSIFICATION)
+	}
+	
+	def Set<ValueSet> getServiceStatus() {
+		getByCategory(ConstUtils.SERVICE_STATUS)
+	}
 }

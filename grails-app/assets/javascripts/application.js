@@ -19,6 +19,12 @@ if (typeof jQuery !== 'undefined') {
 	})(jQuery);
 }
 
+$.datepicker.setDefaults({
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: "yy-mm-dd"
+});
+
 function searchCustomer(url) {
     if($("#search_customer_name").val().trim() === "") {
         return;

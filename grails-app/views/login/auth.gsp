@@ -9,12 +9,13 @@
     <body>
         <div class="body">
             <h1>用户登陆</h1>
-            <g:if test='${flash.errors}'>
-                <div class='errors'>${flash.errors}</div>
+            <g:if test='${flash.message}'>
+                <div class='errors'>${flash.message}</div>
             </g:if>
 
+            <div class="loginForm">
             <form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
-                <table class="loginForm">
+                <table>
                     <tbody>
                         <tr class="prop">
                             <td valign="top" class="name" width="40%"><label for="username">用户名</label></td>
@@ -41,8 +42,9 @@
                             </td>
                         </tr>
                     </tbody>
-                        </table>
+                </table>
             </form>
+            </div>
         </div>
     </body>
     <script type='text/javascript'>

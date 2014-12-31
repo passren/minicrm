@@ -4,8 +4,8 @@ class Invoice {
     
     ValueSet invoiceType
     BigDecimal invoiceAmount
+	Date invoiceDate
     String invoiceNumber
-    String invoiceTrack
     String remark
     Opportunity opportunity
     Date createdDate
@@ -22,9 +22,9 @@ class Invoice {
     
     static constraints = {
         invoiceType nullable:false
-        invoiceAmount nullable:false
+        invoiceAmount nullable:false, blank:false
+		invoiceDate nullable:false, blank:false
         invoiceNumber nullable:true
-        invoiceTrack nullable:true
         remark nullable:true
         opportunity nullable:false
         createdDate nullable: false

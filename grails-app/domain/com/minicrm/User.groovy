@@ -5,8 +5,8 @@ class User {
 	transient springSecurityService
 
 	String username
-	String realname
 	String password
+	String realname
 	SalesPerson salesPerson
 	boolean enabled = true
 	boolean accountExpired
@@ -18,6 +18,7 @@ class User {
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
+		realname blank: false
 		salesPerson nullable: true
 	}
 
@@ -25,8 +26,8 @@ class User {
 		password column: '`password`'
 	}
 
-	Set<RoleGroup> getAuthorities() {
-		UserRoleGroup.findAllByUser(this).collect { it.roleGroup }
+	Set<Role> getAuthorities() {
+		UserRole.findAllByUser(this).collect { it.role }
 	}
 
 	def beforeInsert() {

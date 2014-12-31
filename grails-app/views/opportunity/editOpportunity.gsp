@@ -29,14 +29,9 @@
                 openCustomerSearchDialog(divDialog);
             });
             
-            $.datepicker.setDefaults({
-                changeMonth: true,
-                changeYear: true,
-                dateFormat: "yy-mm-dd"
-            });
-            $("#signedDate").datepicker();
-            $("#impStartDate").datepicker();
-            $("#impEndDate").datepicker();
+            $("#txtSignedDate").datepicker();
+            $("#txtImpStartDate").datepicker();
+            $("#txtImpEndDate").datepicker();
         });
         </script>
     </head>
@@ -131,8 +126,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><label for="signedDate">签约时间</label>
-                                <g:textField id="signedDate" name="signedDate" 
+                            <td><label for="txtSignedDate">签约时间</label>
+                                <g:textField id="txtSignedDate" name="txtSignedDate" 
                                                 value="${com.minicrm.StringUtils.getDate(opportunity?.signedDate, 
                                                             com.minicrm.ConstUtils.DATE_DAY_FORMAT)}" 
                                                 size="15"/>
@@ -154,14 +149,14 @@
                                           noSelection="['':'']"
                                           />
                             </td>
-                            <td><label for="impStartDate">实施开始时间</label>
-                                <g:textField id="impStartDate" name="impStartDate" 
+                            <td><label for="txtImpStartDate">实施开始时间</label>
+                                <g:textField id="txtImpStartDate" name="txtImpStartDate" 
                                                 value="${com.minicrm.StringUtils.getDate(opportunity?.impStartDate, 
                                                             com.minicrm.ConstUtils.DATE_DAY_FORMAT)}" 
                                                 size="15"/>
                             </td>
-                            <td><label for="impEndDate">实施结束时间</label>
-                                <g:textField id="impEndDate" name="impEndDate" 
+                            <td><label for="txtImpEndDate">实施结束时间</label>
+                                <g:textField id="txtImpEndDate" name="txtImpEndDate" 
                                                 value="${com.minicrm.StringUtils.getDate(opportunity?.impEndDate,
                                                             com.minicrm.ConstUtils.DATE_DAY_FORMAT)}" 
                                                 size="15"/>

@@ -19,20 +19,17 @@
 	</head>
 	<body>
 		<div id="banner" role="banner">
-                    <div id="logo"><g:link controller="."><asset:image src="logo.png" alt="MiniCRM"/></g:link></div>
-                    <div id="authority">
-                        <g:link controller=".">主页</g:link>
-                        
-                        <sec:ifNotLoggedIn>
-                            <g:link uri="/login/auth">登陆</g:link>
-                        </sec:ifNotLoggedIn>
-                        
-                        <sec:ifLoggedIn>
-                            <sec:username/>
-                            <g:link uri="/logout">登出</g:link>
-                        </sec:ifLoggedIn>
-                    </div>
-                </div>
+            <div id="logo"><g:link controller="."><asset:image src="logo.png" alt="MiniCRM"/></g:link></div>
+            <div id="authority">
+                <sec:ifNotLoggedIn>
+                    <g:link controller="login" action="auth">登陆</g:link>
+                </sec:ifNotLoggedIn>
+                
+                <sec:ifLoggedIn>
+                    您好, <sec:username/>! <g:link uri="/logout">登出</g:link>
+                </sec:ifLoggedIn>
+            </div>
+        </div>
 		
 		<div id="menu" role="complementary">
 			<h1>销售跟踪</h1>
@@ -40,20 +37,20 @@
 				<li><asset:image src="link.gif" /> <g:link controller="customer">客户管理</g:link></li>
 				<li><asset:image src="link.gif" /> <g:link controller="activity">销售活动</g:link></li>
 				<li><asset:image src="link.gif" /> <g:link controller="opportunity">机会跟踪</g:link></li>
-				<li><asset:image src="link.gif" /> <g:link controller="service">售后服务</g:link></li>
+				<li><asset:image src="link.gif" /> <g:link controller="serviceRequest">售后服务</g:link></li>
 			</ul>
-                        <sec:ifAnyGranted roles="ADMIN">
+        <sec:ifAnyGranted roles="${com.minicrm.ConstUtils.ROLE_ADMIN}">
 			<h1>系统管理</h1>
 			<ul>
 				<li><asset:image src="link.gif" /> <g:link controller="admin" action="listUsers">用户管理</g:link></li>
 				<li><asset:image src="link.gif" /> <g:link controller="sales" action="listSales">销售人员</g:link></li>
 			</ul>
-                        </sec:ifAnyGranted>
+        </sec:ifAnyGranted>
 		</div>
 		
-                <div id="page-body" role="main">
-                    <g:layoutBody/>
-                </div>
+        <div id="page-body" role="main">
+            <g:layoutBody/>
+        </div>
                 
 		<div class="footer" role="contentinfo"><a>miniCRM v<g:meta name="app.version"/> (Base on Grails<g:meta name="app.grails.version"/>)</a></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
