@@ -23,7 +23,7 @@ class OpportunityService {
             if(criteriaMap.search_opportunity_product!=null &&
                 criteriaMap.search_opportunity_product.isNumber()){
                 product {
-                    eq("id", criteriaMap.search_opportunity_status.toLong())
+                    eq("id", criteriaMap.search_opportunity_product.toLong())
                 }
             }
             if(criteriaMap.order && criteriaMap.sort){

@@ -66,10 +66,10 @@ grails.project.dependency.resolution = {
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
         runtime ":database-migration:1.4.0"
-		runtime ":jquery:1.11.1"
+        runtime ":jquery:1.11.1"
 
         // Uncomment these to enable additional asset-pipeline capabilities
-		compile ":jquery-ui:1.10.4"
+        compile ":jquery-ui:1.10.4"
         //compile ":sass-asset-pipeline:1.9.0"
         //compile ":less-asset-pipeline:1.10.0"
         //compile ":coffee-asset-pipeline:1.8.0"

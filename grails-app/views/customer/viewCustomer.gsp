@@ -60,13 +60,13 @@
   				</tr>
   				<tr>
   					<td><label for="customer.createdDate">创建日期</label>
-  						<g:formatDate format="yyyy-MM-dd HH:mm:SS" date="${customer.createdDate}"/>
+  						<g:formatDate format="${com.minicrm.ConstUtils.DATE_TIME_FORMAT}" date="${customer.createdDate}"/>
   					</td>
   					<td><label for="customer.createUser">创建人员</label>
   						${customer.createUser.realname}
   					</td>
   					<td><label for="customer.lastUpdatedDate">更新日期</label>
-						<g:formatDate format="yyyy-MM-dd HH:mm:SS" date="${customer.lastUpdatedDate}"/>
+						<g:formatDate format="${com.minicrm.ConstUtils.DATE_TIME_FORMAT}" date="${customer.lastUpdatedDate}"/>
 					</td>
   					<td><label for="customer.lastUpdateUser">更新人员</label>
 						${customer.lastUpdateUser.realname}

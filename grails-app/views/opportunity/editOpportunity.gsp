@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="layout" content="main"/>
-        <title>销售机会 > 维护销售机会</title>
+        <title>机会跟踪 > 维护销售机会</title>
         
         <asset:stylesheet src="redmond/jquery-ui-1.10.4.min.css"/>
         
@@ -28,6 +28,15 @@
                 var divDialog = "#dialog-form";
                 openCustomerSearchDialog(divDialog);
             });
+            
+            $.datepicker.setDefaults({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "yy-mm-dd"
+            });
+            $("#signedDate").datepicker();
+            $("#impStartDate").datepicker();
+            $("#impEndDate").datepicker();
         });
         </script>
     </head>
@@ -38,7 +47,7 @@
             <a id="linkSaveForm" href="#">保存</a>
 	</div>
 	
-  	<h1>销售机会 > 维护销售机会</h1>
+  	<h1>机会跟踪 > 维护销售机会</h1>
 	<g:if test="${flash.message}">
 		<div class="message">${flash.message}</div>
 	</g:if>
@@ -123,14 +132,53 @@
                         </tr>
                         <tr>
                             <td><label for="signedDate">签约时间</label>
-                                <g:datePicker name="signedDate" value="${opportunity?.signedDate}"
-                                        precision="day" years="${2000..2050}" noSelection="['':'-Choose-']"/>
+                                <g:textField id="signedDate" name="signedDate" 
+                                                value="${com.minicrm.StringUtils.getDate(opportunity?.signedDate, 
+                                                            com.minicrm.ConstUtils.DATE_DAY_FORMAT)}" 
+                                                size="15"/>
                             </td>
                             <td><label for="contractNumber">合同编号</label>
                                 <g:textField name="contractNumber" value="${opportunity?.contractNumber}" size="15"/>
                             </td>
                             <td colspan="2"><label for="contractAmount">合同金额</label>
                                 <g:textField name="contractAmount" value="${opportunity?.contractAmount}" size="15"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="impStatus">实施状态</label>
+                                <g:select name="impStatus"
+                                          from="${impStatus}"
+                                          value="${opportunity?.impStatus?.id}"
+                                          optionKey="id"
+                                          optionValue="code1"
+                                          noSelection="['':'']"
+                                          />
+                            </td>
+                            <td><label for="impStartDate">实施开始时间</label>
+                                <g:textField id="impStartDate" name="impStartDate" 
+                                                value="${com.minicrm.StringUtils.getDate(opportunity?.impStartDate, 
+                                                            com.minicrm.ConstUtils.DATE_DAY_FORMAT)}" 
+                                                size="15"/>
+                            </td>
+                            <td><label for="impEndDate">实施结束时间</label>
+                                <g:textField id="impEndDate" name="impEndDate" 
+                                                value="${com.minicrm.StringUtils.getDate(opportunity?.impEndDate,
+                                                            com.minicrm.ConstUtils.DATE_DAY_FORMAT)}" 
+                                                size="15"/>
+                            </td>
+                            <td><label for="impArea">实施地区</label>
+                                <g:textField name="impArea" value="${opportunity?.impArea}" size="15"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="certificationAccount">开办帐号</label>
+                                <g:textField name="certificationAccount" value="${opportunity?.certificationAccount}" size="15"/>
+                            </td>
+                            <td><label for="certificationNumber">证书编号</label>
+                                <g:textField name="certificationNumber" value="${opportunity?.certificationNumber}" size="15"/>
+                            </td>
+                            <td colspan="2"><label for="impOthers">实施备注</label>
+                                <g:textField name="impOthers" value="${opportunity?.impOthers}" size="40"/>
                             </td>
                         </tr>
                         <tr>

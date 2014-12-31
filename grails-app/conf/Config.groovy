@@ -121,14 +121,19 @@ log4j.main = {
 
 
 // Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.password.algorithm='bcrypt'
-grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.minicrm.User'
-grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.minicrm.UserRole'
-grails.plugin.springsecurity.authority.className = 'com.minicrm.Role'
-grails.plugin.springsecurity.authority.groupAuthorityNameField = 'authorities'
-grails.plugin.springsecurity.useRoleGroups = true
-grails.plugin.springsecurity.requestMap.className = 'com.minicrm.Requestmap'
-grails.plugin.springsecurity.securityConfigType = "Requestmap"
-grails.plugin.springsecurity.rejectIfNoRule = false
-grails.plugin.springsecurity.fii.rejectPublicInvocations = false
-
+grails {
+    plugin {
+        springsecurity {
+            password.algorithm='bcrypt'
+            userLookup.userDomainClassName = 'com.minicrm.User'
+            userLookup.authorityJoinClassName = 'com.minicrm.UserRole'
+            authority.className = 'com.minicrm.Role'
+            authority.groupAuthorityNameField = 'authorities'
+            useRoleGroups = true
+            securityConfigType = "Requestmap"
+            requestMap.className = 'com.minicrm.Requestmap'
+            rejectIfNoRule = false
+            fii.rejectPublicInvocations = false
+        }
+    }
+}

@@ -37,7 +37,8 @@ class OpportunityController {
     def addOpportunity() {
         render(view:"editOpportunity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD,
                                                 status:valueSetService.getOpportunityStatus(),
-                                                products:valueSetService.getProductList()])
+                                                products:valueSetService.getProductList(),
+                                                impStatus:valueSetService.getImplementStatus()])
     }
 
     def updateOpportunity() {
@@ -45,7 +46,8 @@ class OpportunityController {
         render(view:"editOpportunity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE,
                                                 opportunity:opportunity,
                                                 status:valueSetService.getOpportunityStatus(),
-                                                products:valueSetService.getProductList()])
+                                                products:valueSetService.getProductList(),
+                                                impStatus:valueSetService.getImplementStatus()])
     }
     
     def saveOpportunity() {
@@ -54,6 +56,9 @@ class OpportunityController {
             opportunity = new Opportunity(params)
             def customer = Customer.get(params.customerId)
             opportunity.customer = customer
+            opportunity.signedDate = StringUtils.string2Date(params.signedDate, ConstUtils.DATE_DAY_FORMAT)
+            opportunity.impStartDate = StringUtils.string2Date(params.impStartDate, ConstUtils.DATE_DAY_FORMAT)
+            opportunity.impEndDate = StringUtils.string2Date(params.impEndDate, ConstUtils.DATE_DAY_FORMAT)
             opportunity.createdDate = new Date()
             opportunity.createUser = User.get(1)
             opportunity.lastUpdatedDate = new Date()
@@ -61,6 +66,9 @@ class OpportunityController {
         } else if (params.actionFlag == ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE) {
             opportunity = Opportunity.get(params.id)
             opportunity.properties = params
+            opportunity.signedDate = StringUtils.string2Date(params.signedDate, ConstUtils.DATE_DAY_FORMAT)
+            opportunity.impStartDate = StringUtils.string2Date(params.impStartDate, ConstUtils.DATE_DAY_FORMAT)
+            opportunity.impEndDate = StringUtils.string2Date(params.impEndDate, ConstUtils.DATE_DAY_FORMAT)
             opportunity.lastUpdatedDate = new Date()
             opportunity.lastUpdateUser = User.get(1)
         }
@@ -71,7 +79,8 @@ class OpportunityController {
             render(view:"editOpportunity", model:[actionFlag:params.actionFlag,
                                                     opportunity:opportunity,
                                                     status:valueSetService.getOpportunityStatus(),
-                                                    products:valueSetService.getProductList()])
+                                                    products:valueSetService.getProductList(),
+                                                    impStatus:valueSetService.getImplementStatus()])
         }
     }
 }

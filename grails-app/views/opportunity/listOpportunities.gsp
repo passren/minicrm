@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="layout" content="main"/>
-        <title>销售机会 > 机会列表</title>
+        <title>机会跟踪 > 机会列表</title>
         
         <script type="text/javascript">
         $(document).ready(function(){
@@ -21,7 +21,7 @@
             <g:link action="addOpportunity">创建机会</g:link>
         </div>
         
-        <h1>销售机会 > 机会列表</h1>
+        <h1>机会跟踪 > 机会列表</h1>
         <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
         </g:if>
@@ -77,6 +77,7 @@
                         <th style="width: 15%">签约时间</th>
                         <th style="width: 15%">合同编号</th>
                         <th style="width: 10%">合同金额</th>
+                        <th style="width: 10%">实施状态</th>
                         <th style="width: 5%">创建日期</th>
                         <th style="width: 5%">更新日期</th>
                     </tr>
@@ -92,6 +93,7 @@
                             <td><g:formatDate format="yyyy-MM-dd" date="${opportunity.signedDate}"/></td>
                             <td>${opportunity.contractNumber?.encodeAsHTML()}</td>
                             <td>${opportunity.contractAmount?.encodeAsHTML()}</td>
+                            <td>${opportunity.impStatus?.code1}</td>
                             <td><g:formatDate format="yyyy-MM-dd" date="${opportunity.createdDate}"/></td>
                             <td><g:formatDate format="yyyy-MM-dd" date="${opportunity.lastUpdatedDate}"/></td>
                         </tr>

@@ -53,8 +53,31 @@ hr {
 	border-width: 0.1em;
 }
 
+#banner {
+    height: 4em;
+    background-color: #0080c0;
+}
+
+#banner a {
+    display: inline-block;
+    margin: 0.2em 0em 0em 0.2em;
+}
+
 #logo {
-	background-color: #0080c0;
+    width: 100%;
+}
+
+#authority {
+    width: 100%;
+    font-size: 0.8em;
+    color: #fff;
+    text-align: right;
+    margin-top: -1.8em;
+    margin-left: -1.5em;
+}
+
+#authority a {
+    color: #fff;
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */
@@ -94,11 +117,6 @@ img {
 }
 
 /* GENERAL */
-
-#logo a {
-	display: inline-block;
-	margin: 1em;
-}
 
 .content {
 }

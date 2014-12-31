@@ -139,3 +139,12 @@ p {
 	font-weight: bold;
 	margin: 0em 0.5em 0em 0em;
 }
+.loginForm {
+    border: 1px solid #DFDFDF;
+    background-color: #eee;
+    width: 35%  
+}
+
+.loginForm .name {
+    text-align: right;
+}

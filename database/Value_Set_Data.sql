@@ -58,3 +58,7 @@ INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('OPPORTUNITY
 INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('OPPORTUNITY_STATUS','Follow','跟进',NULL);
 INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('OPPORTUNITY_STATUS','Signed','签约',NULL);
 INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('OPPORTUNITY_STATUS','Close','关闭',NULL);
+
+INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('IMPLEMENT_STATUS','NotStart','未实施',NULL);
+INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('IMPLEMENT_STATUS','InProcess','实施中',NULL);
+INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('IMPLEMENT_STATUS','Completed','已结束',NULL);

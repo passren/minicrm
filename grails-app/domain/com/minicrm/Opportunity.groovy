@@ -9,6 +9,15 @@ class Opportunity {
     String contractNumber
     BigDecimal contractAmount
     String remark
+    
+    ValueSet impStatus
+    Date impStartDate
+    Date impEndDate
+    String impArea
+    String certificationAccount
+    String certificationNumber
+    String impOthers
+    
     Customer customer
     Date createdDate
     User createUser
@@ -31,6 +40,13 @@ class Opportunity {
         signedDate nullable:true
         contractNumber nullable:true
         contractAmount nullable:true
+        impStatus nullable:true
+        impStartDate nullable:true
+        impEndDate nullable:true
+        impArea nullable:true
+        certificationNumber nullable:true
+        impOthers nullable:true
+        certificationAccount nullable:true
         remark nullable:true
         customer nullable:false
         createdDate nullable: false

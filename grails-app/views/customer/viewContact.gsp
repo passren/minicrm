@@ -74,13 +74,13 @@
   				</tr>
   				<tr>
   					<td><label for="contact.createdDate">创建日期</label>
-  						<g:formatDate format="yyyy-MM-dd HH:mm:SS" date="${contact.createdDate}"/>
+  						<g:formatDate format="${com.minicrm.ConstUtils.DATE_TIME_FORMAT}" date="${contact.createdDate}"/>
   					</td>
   					<td><label for="contact.createUser">创建人员</label>
   						${contact.createUser.realname}
   					</td>
   					<td><label for="contact.lastUpdatedDate">更新日期</label>
-						<g:formatDate format="yyyy-MM-dd HH:mm:SS" date="${contact.lastUpdatedDate}"/>
+						<g:formatDate format="${com.minicrm.ConstUtils.DATE_TIME_FORMAT}" date="${contact.lastUpdatedDate}"/>
 					</td>
   					<td><label for="contact.lastUpdateUser">更新人员</label>
 						${contact.lastUpdateUser.realname}

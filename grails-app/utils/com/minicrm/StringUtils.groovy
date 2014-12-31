@@ -3,14 +3,23 @@
  */
 package com.minicrm
 
+import java.text.SimpleDateFormat
+
 /**
  * @author PPQQ
  *
  */
 class StringUtils {
+    
     static def getDate = {Date date, String format ->
         if(date == null) return ""
         return new java.text.SimpleDateFormat(format).format(date)
+    }
+    
+    static def string2Date = {String date, String format ->
+        if(date==null || date.isEmpty()) return null
+        def sdf = new SimpleDateFormat(format)
+        return sdf.parse(date)
     }
 
     static def escapeHtml = {String src ->
