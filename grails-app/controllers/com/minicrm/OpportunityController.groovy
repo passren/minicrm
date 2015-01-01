@@ -2,8 +2,8 @@ package com.minicrm
 
 class OpportunityController {
 
+	def springSecurityService
     def opportunityService
-    def valueSetService
     
     def index() {
         redirect(action:"listOpportunities")
@@ -20,9 +20,7 @@ class OpportunityController {
         }
 
         render(view:"listOpportunities", model:[opportunities:opportunities,
-                                                searchCriteria:searchCriteria,
-                                                status:valueSetService.getOpportunityStatus(),
-                                                products:valueSetService.getProductList()])
+                                                searchCriteria:searchCriteria])
     }
     
     def viewOpportunity() {
@@ -35,19 +33,13 @@ class OpportunityController {
     }
     
     def addOpportunity() {
-        render(view:"editOpportunity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD,
-                                                status:valueSetService.getOpportunityStatus(),
-                                                products:valueSetService.getProductList(),
-                                                impStatus:valueSetService.getImplementStatus()])
+        render(view:"editOpportunity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD])
     }
 
     def updateOpportunity() {
         def opportunity = Opportunity.get(params.id)
         render(view:"editOpportunity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE,
-                                                opportunity:opportunity,
-                                                status:valueSetService.getOpportunityStatus(),
-                                                products:valueSetService.getProductList(),
-                                                impStatus:valueSetService.getImplementStatus()])
+                                                opportunity:opportunity])
     }
     
     def saveOpportunity() {
@@ -60,9 +52,9 @@ class OpportunityController {
             opportunity.impStartDate = StringUtils.string2Date(params.txtImpStartDate, ConstUtils.DATE_DAY_FORMAT)
             opportunity.impEndDate = StringUtils.string2Date(params.txtImpEndDate, ConstUtils.DATE_DAY_FORMAT)
             opportunity.createdDate = new Date()
-            opportunity.createUser = User.get(1)
+            opportunity.createUser = springSecurityService.currentUser
             opportunity.lastUpdatedDate = new Date()
-            opportunity.lastUpdateUser = User.get(1)
+            opportunity.lastUpdateUser = springSecurityService.currentUser
         } else if (params.actionFlag == ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE) {
             opportunity = Opportunity.get(params.id)
             opportunity.properties = params
@@ -70,17 +62,14 @@ class OpportunityController {
             opportunity.impStartDate = StringUtils.string2Date(params.txtImpStartDate, ConstUtils.DATE_DAY_FORMAT)
             opportunity.impEndDate = StringUtils.string2Date(params.txtImpEndDate, ConstUtils.DATE_DAY_FORMAT)
             opportunity.lastUpdatedDate = new Date()
-            opportunity.lastUpdateUser = User.get(1)
+            opportunity.lastUpdateUser = springSecurityService.currentUser
         }
 
         if (opportunity.save(flush:true)) {
             redirect(action:"listOpportunities")
         } else {
             render(view:"editOpportunity", model:[actionFlag:params.actionFlag,
-                                                    opportunity:opportunity,
-                                                    status:valueSetService.getOpportunityStatus(),
-                                                    products:valueSetService.getProductList(),
-                                                    impStatus:valueSetService.getImplementStatus()])
+                                                    opportunity:opportunity])
         }
     }
 	
@@ -92,16 +81,14 @@ class OpportunityController {
 	def addReceivable() {
 		def opportunity = Opportunity.get(params.id)
 		render(view:"editReceivable", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD,
-												opportunity:opportunity,
-												receiptMethods:valueSetService.getReceiptMethod()])
+												opportunity:opportunity])
 	}
 	
 	def updateReceivable() {
 		def receivable = Receivable.get(params.id)
 		render(view:"editReceivable", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE,
 												receivable:receivable,
-												opportunity:receivable.opportunity,
-												receiptMethods:valueSetService.getReceiptMethod()])
+												opportunity:receivable.opportunity])
 	}
 	
 	def saveReceivable() {
@@ -112,15 +99,15 @@ class OpportunityController {
 			receivable.opportunity = opportunity
 			receivable.receiptDate = StringUtils.string2Date(params.txtReceiptDate, ConstUtils.DATE_DAY_FORMAT)
 			receivable.createdDate = new Date()
-			receivable.createUser = User.get(1)
+			receivable.createUser = springSecurityService.currentUser
 			receivable.lastUpdatedDate = new Date()
-			receivable.lastUpdateUser = User.get(1)
+			receivable.lastUpdateUser = springSecurityService.currentUser
 		} else if (params.actionFlag == ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE) {
 			receivable = Receivable.get(params.id)
 			receivable.properties = params
 			receivable.receiptDate = StringUtils.string2Date(params.txtReceiptDate, ConstUtils.DATE_DAY_FORMAT)
 			receivable.lastUpdatedDate = new Date()
-			receivable.lastUpdateUser = User.get(1)
+			receivable.lastUpdateUser = springSecurityService.currentUser
 		}
 
 		if (receivable.save(flush:true)) {
@@ -128,8 +115,7 @@ class OpportunityController {
 		} else {
 			render(view:"editReceivable", model:[actionFlag:params.actionFlag,
 													receivable:receivable,
-													opportunity:receivable.opportunity,
-													receiptMethods:valueSetService.getReceiptMethod()])
+													opportunity:receivable.opportunity])
 		}
 	}
 	
@@ -149,16 +135,14 @@ class OpportunityController {
 	def addInvoice() {
 		def opportunity = Opportunity.get(params.id)
 		render(view:"editInvoice", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD,
-												opportunity:opportunity,
-												invoiceTypes:valueSetService.getInvoiceType()])
+												opportunity:opportunity])
 	}
 	
 	def updateInvoice() {
 		def invoice = Invoice.get(params.id)
 		render(view:"editInvoice", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE,
 												invoice:invoice,
-												opportunity:invoice.opportunity,
-												invoiceTypes:valueSetService.getInvoiceType()])
+												opportunity:invoice.opportunity])
 	}
 	
 	def saveInvoice() {
@@ -169,15 +153,15 @@ class OpportunityController {
 			invoice.opportunity = opportunity
 			invoice.invoiceDate = StringUtils.string2Date(params.txtInvoiceDate, ConstUtils.DATE_DAY_FORMAT)
 			invoice.createdDate = new Date()
-			invoice.createUser = User.get(1)
+			invoice.createUser = springSecurityService.currentUser
 			invoice.lastUpdatedDate = new Date()
-			invoice.lastUpdateUser = User.get(1)
+			invoice.lastUpdateUser = springSecurityService.currentUser
 		} else if (params.actionFlag == ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE) {
 			invoice = Invoice.get(params.id)
 			invoice.properties = params
 			invoice.invoiceDate = StringUtils.string2Date(params.txtInvoiceDate, ConstUtils.DATE_DAY_FORMAT)
 			invoice.lastUpdatedDate = new Date()
-			invoice.lastUpdateUser = User.get(1)
+			invoice.lastUpdateUser = springSecurityService.currentUser
 		}
 
 		if (invoice.save(flush:true)) {
@@ -185,8 +169,7 @@ class OpportunityController {
 		} else {
 			render(view:"editInvoice", model:[actionFlag:params.actionFlag,
 													invoice:invoice,
-													opportunity:invoice.opportunity,
-													invoiceTypes:valueSetService.getInvoiceType()])
+													opportunity:invoice.opportunity])
 		}
 	}
 	

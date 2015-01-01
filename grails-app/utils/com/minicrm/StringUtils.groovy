@@ -55,4 +55,8 @@ class StringUtils {
         }
         return builder.toString()
     }
+	
+	static def null2Blank = {String str ->
+		return str==null ? "" : null2Blank
+	}
 }

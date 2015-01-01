@@ -84,3 +84,13 @@ INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('SERVICE_STA
 INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('SERVICE_STATUS','SS20','处理中',NULL);
 INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('SERVICE_STATUS','SS20','已解决',NULL);
 INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('SERVICE_STATUS','SS20','关闭',NULL);
+
+INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('PERSON_POSITION','PP05','售前',NULL);
+INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('PERSON_POSITION','PP10','售后',NULL);
+INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('PERSON_POSITION','PP15','服务',NULL);
+INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('PERSON_POSITION','PP20','运维',NULL);
+INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('PERSON_POSITION','PP25','财务',NULL);
+
+INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('PERSON_STATUS','PS05','在职',NULL);
+INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('PERSON_STATUS','PS10','待岗',NULL);
+INSERT INTO `value_set` (`category`,`code`,`code1`,`code2`) VALUES ('PERSON_STATUS','PS15','离职',NULL);

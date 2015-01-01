@@ -142,6 +142,9 @@
                     </g:each>
                 </tbody>
             </table>
+            <div class="paginate">
+                <span>记录数: ${opportunity.receivables?.size()}</span>
+            </div>
   	</div>
         
         <div class="list">
@@ -174,6 +177,9 @@
                     </g:each>
                 </tbody>
             </table>
-  	</div>
+            <div class="paginate">
+                <span>记录数: ${opportunity.invoices?.size()}</span>
+            </div>
+        </div>
     </body>
 </html>

@@ -1,5 +1,7 @@
 package com.minicrm
 
+import java.util.Set;
+
 class ValueSet {
 	
 	String category

@@ -64,4 +64,12 @@ class ValueSetService {
 	def Set<ValueSet> getServiceStatus() {
 		getByCategory(ConstUtils.SERVICE_STATUS)
 	}
+	
+	def Set<ValueSet> getPersonPosition() {
+		getByCategory(ConstUtils.PERSON_POSITION)
+	}
+	
+	def Set<ValueSet> getPersonStatus() {
+		getByCategory(ConstUtils.PERSON_STATUS)
+	}
 }

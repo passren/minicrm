@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%
+    def valueSetService = grailsApplication.mainContext.getBean("valueSetService");
+%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -88,21 +92,16 @@ $(document).ready(function(){
   						<g:textField name="email" value="${contact?.email}" size="15"/>
   					</td>
   				</tr>
-                                <tr>
-                                  	<td><label for="status">状态</label>
-	  					<g:select name="status"
-						          from="${status}"
-						          value="${contact?.status?.id}"
-						          optionKey="id"
-						          optionValue="code1"
-						          noSelection="['':'']"
-						          />
-  					</td>
-                                        <td colspan="3"><label for="remark">备注信息</label>
-						<g:textField name="remark" value="${contact?.remark}" size="80"/>
-  					</td>
-                                </tr>
-  	    	</tbody>
+				<tr>
+					<td><label for="status">状态</label> <g:select name="status"
+							from="${valueSetService.getCustomerStatus()}"
+							value="${contact?.status?.id}" optionKey="id"
+							optionValue="code1" noSelection="['':'']" />
+					</td>
+					<td colspan="3"><label for="remark">备注信息</label> <g:textField
+							name="remark" value="${contact?.remark}" size="80" /></td>
+				</tr>
+			</tbody>
   	    </table>
   	  </g:form>
  	</div>

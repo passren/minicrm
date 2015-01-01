@@ -4,9 +4,9 @@ import grails.converters.JSON
 
 class CustomerController {
 	
+	def springSecurityService
     def customerService
-    def valueSetService
-    def areaService
+	def areaService
 
     def index() {
         redirect(action:"listCustomers")
@@ -23,11 +23,7 @@ class CustomerController {
         }
 
         render(view:"listCustomers", model:[customers:customers,
-                                                searchCriteria:searchCriteria,
-                                                provinces:areaService.getProvinces(),
-                                                categories:valueSetService.getCustomerCategory(),
-                                                classifications:valueSetService.getCustomerClassification(),
-                                                sources:valueSetService.getCustomerSource()])
+                                                searchCriteria:searchCriteria])
     }
 
     def getCustomersAsJson() {
@@ -62,26 +58,13 @@ class CustomerController {
     }
 
     def addCustomer() {
-            render(view:"editCustomer", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD,
-                                                    provinces:areaService.getProvinces(),
-                                                    categories:valueSetService.getCustomerCategory(),
-                                                    classifications:valueSetService.getCustomerClassification(),
-                                                    sources:valueSetService.getCustomerSource(),
-                                                    situation:valueSetService.getCustomerSituation(),
-                                                    status:valueSetService.getCustomerStatus()])
+            render(view:"editCustomer", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD])
     }
 
     def updateCustomer() {
             def customer = Customer.get(params.id)
             render(view:"editCustomer", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE, 
-                                                    customer:customer,
-                                                    provinces:areaService.getProvinces(),
-                                                    cities:areaService.getCitiesByProvince(customer.city.province),
-                                                    categories:valueSetService.getCustomerCategory(),
-                                                    classifications:valueSetService.getCustomerClassification(),
-                                                    sources:valueSetService.getCustomerSource(),
-                                                    situation:valueSetService.getCustomerSituation(),
-                                                    status:valueSetService.getCustomerStatus()])
+                                                    customer:customer])
     }
 
     def getCitiesByProvince() {
@@ -98,43 +81,35 @@ class CustomerController {
             if (params.actionFlag == ConstUtils.CONTROLLER_ACTION_FLAG_ADD) {
                     customer = new Customer(params)
                     customer.createdDate = new Date()
-                    customer.createUser = User.get(1)
+                    customer.createUser = springSecurityService.currentUser
                     customer.lastUpdatedDate = new Date()
-                    customer.lastUpdateUser = User.get(1)
+                    customer.lastUpdateUser = springSecurityService.currentUser
             } else if (params.actionFlag == ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE) {
                     customer = Customer.get(params.id)
                     customer.properties = params
                     customer.lastUpdatedDate = new Date()
-                    customer.lastUpdateUser = User.get(1)
+                    customer.lastUpdateUser = springSecurityService.currentUser
             }
 
             if (customer.save(flush:true)) {
                     redirect(action:"listCustomers")
             } else {
                     render(view:"editCustomer", model:[actionFlag:params.actionFlag, 
-                                                        customer:customer,
-                                                        provinces:areaService.getProvinces(),
-                                                        cities:areaService.getCitiesByProvince(customer?.city?.province),
-                                                        categories:valueSetService.getCustomerCategory(),
-                                                        classifications:valueSetService.getCustomerClassification(),
-                                                        sources:valueSetService.getCustomerSource(),
-                                                        status:valueSetService.getCustomerStatus()])
+                                                        customer:customer])
             }
     }
 
     def addContact() {
             def customer = Customer.get(params.id)
             render(view:"editContact", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD,
-                                                customer:customer,
-                                                status:valueSetService.getCustomerStatus()])
+                                                customer:customer])
     }
 
     def updateContact() {
             def contact = Contact.get(params.id)
             render(view:"editContact", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE,
                                                 contact:contact,
-                                                customer:contact.customer,
-                                                status:valueSetService.getCustomerStatus()])
+                                                customer:contact.customer])
     }
 
     def saveContact() {
@@ -145,23 +120,22 @@ class CustomerController {
                     contact = new Contact(params)
                     contact.customer = customer
                     contact.createdDate = new Date()
-                    contact.createUser = User.get(1)
+                    contact.createUser = springSecurityService.currentUser
                     contact.lastUpdatedDate = new Date()
-                    contact.lastUpdateUser = User.get(1)
+                    contact.lastUpdateUser = springSecurityService.currentUser
             } else if (params.actionFlag == ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE) {
                     contact = Contact.get(params.id)
                     contact.properties = params
                     contact.lastUpdatedDate = new Date()
-                    contact.lastUpdateUser = User.get(1)
+                    contact.lastUpdateUser = springSecurityService.currentUser
             }
 
             if (contact.save(flush:true)) {
                     redirect(action:"viewCustomer", id:customer.id)
             } else {
-                    render(view:"editContact", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD,
+                    render(view:"editContact", model:[actionFlag:params.actionFlag,
                                                         customer:customer,
-                                                        contact:contact,
-                                                        status:valueSetService.getCustomerStatus()])
+                                                        contact:contact])
             }
     }
 }

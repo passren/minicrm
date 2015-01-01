@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta name="layout" content="main"/>
-<title>销售活动 > 维护销售活动</title>
+<title>售后服务 > 维护服务请求</title>
 
 <asset:stylesheet src="redmond/jquery-ui-1.10.4.min.css"/>
 
@@ -15,11 +15,11 @@
 $(document).ready(function(){
 	$("#linkBack").click(function(){
             if(!confirm("尚未保存,确认返回？")) return false;
-            location="<g:createLink action='listActivities'/>";
+            location="<g:createLink action='listServiceRequests'/>";
 	});
 	
 	$("#linkSaveForm").click(function(){
-            $("#formActivity").submit();
+            $("#formServiceRequest").submit();
 	});
 
 	$("#btnSearchCustomer").click(function(){
@@ -31,6 +31,8 @@ $(document).ready(function(){
             var divDialog = "#dialog-form";
             openCustomerSearchDialog(divDialog);
 	});
+
+	$("#txtCompletedDate").datepicker();
 });
 </script>
 
@@ -42,13 +44,13 @@ $(document).ready(function(){
 		<a id="linkSaveForm" href="#">保存</a>
 	</div>
 	
-  	<h1>销售活动 > 维护销售活动</h1>
+  	<h1>售后服务 > 维护服务请求</h1>
 	<g:if test="${flash.message}">
 		<div class="message">${flash.message}</div>
 	</g:if>
-	<g:hasErrors bean="${activity}">
+	<g:hasErrors bean="${serviceRequest}">
 	  <div class="errors">
-	    <g:renderErrors bean="${activity}" as="list" />
+	    <g:renderErrors bean="${serviceRequest}" as="list" />
 	  </div>
 	</g:hasErrors>
 	
@@ -73,9 +75,9 @@ $(document).ready(function(){
 	</div>
 	
  	<div class="form">
-  	  <g:form name="formActivity" action="saveActivity">
-  	    <input type="hidden" id="id" name="id" value="${activity?.id}"/>
-  	    <input type="hidden" id="customerId" name="customerId" value="${activity?.customer?.id}"/>
+  	  <g:form name="formServiceRequest" action="saveServiceRequest">
+  	    <input type="hidden" id="id" name="id" value="${serviceRequest?.id}"/>
+  	    <input type="hidden" id="customerId" name="customerId" value="${serviceRequest?.customer?.id}"/>
   	    <input type="hidden" id="actionFlag" name="actionFlag" value="${actionFlag}"/>
   	    
   		<table>
@@ -84,14 +86,14 @@ $(document).ready(function(){
   			<tbody>
   				<tr>
   					<td colspan="4"><label for="customerName">客户名称</label>
-  						<g:textField id="customerName" name="customerName" value="${activity?.customer?.name}" size="40" readonly="true"/>
+  						<g:textField id="customerName" name="customerName" value="${serviceRequest?.customer?.name}" size="40" readonly="true"/>
   						
   						<g:if test="${actionFlag == 'A'}">
   							<a id="linkSearchCustomer" href="#">查找客户</a>
   						</g:if>
   						
   						<g:if test="${actionFlag == 'U'}">
-  							<g:link controller="customer" action="viewCustomer" id="${activity.customer.id}" target="_blank">客户信息</g:link>
+  							<g:link controller="customer" action="viewCustomer" id="${serviceRequest.customer.id}" target="_blank">客户信息</g:link>
   						</g:if>
   					</td>
   				</tr>
@@ -99,13 +101,13 @@ $(document).ready(function(){
   					<td colspan="4"><hr/></td>
   				</tr>
   				<tr>
-  					<td colspan="3"><label for="summary">活动概要</label>
-  						<g:textField name="summary" value="${activity?.summary}" size="40"/>
+  					<td colspan="3"><label for="name">服务请求</label>
+  						<g:textField name="name" value="${serviceRequest?.name}" size="60"/>
   					</td>
-  					<td><label for="type">活动类型</label>
-	  					<g:select name="type"
-						          from="${valueSetService.getActivityType()}"
-						          value="${activity?.type?.id}"
+  					<td><label for="classification">服务定级</label>
+	  					<g:select name="classification"
+						          from="${valueSetService.getServiceClass()}"
+						          value="${serviceRequest?.classification?.id}"
 						          optionKey="id"
 						          optionValue="code1"
 						          noSelection="['':'']"
@@ -113,16 +115,31 @@ $(document).ready(function(){
   					</td>
   				</tr>
   				<tr>
-  					<td colspan="2"><label for="issue">情况总结</label>
-  						<g:textArea name="issue" value="${activity?.issue}" rows="5" cols="60"/>
+  					<td><label for="status">服务状态</label>
+                        <g:select name="status"
+                                  from="${valueSetService.getServiceStatus()}"
+                                  value="${serviceRequest?.status?.id}"
+                                  optionKey="id"
+                                  optionValue="code1"
+                                  noSelection="['':'']"
+                                  />
   					</td>
-  					<td colspan="2"><label for="solution">处理措施</label>
-  						<g:textArea name="solution" value="${activity?.solution}" rows="5" cols="60"/>
+  					<td><label for="completedDate">完成日期</label>
+  						<g:textField name="txtCompletedDate" 
+  						                value="${com.minicrm.StringUtils.getDate(serviceRequest?.completedDate,
+                                                    com.minicrm.ConstUtils.DATE_DAY_FORMAT)}" 
+  						                size="15"/>
   					</td>
+  					<td><label for="maintainer">维护人</label>
+                        <g:textField name="maintainer" value="${serviceRequest?.maintainer}" size="15"/>
+                    </td>
+                    <td><label for="owner">责任人</label>
+                        <g:textField name="owner" value="${serviceRequest?.owner}" size="15"/>
+                    </td>
   				</tr>
   				<tr>
   					<td colspan="4"><label for="remark">备注信息</label>
-						<g:textField name="remark" value="${activity?.remark}" size="80"/>
+						<g:textField name="remark" value="${serviceRequest?.remark}" size="80"/>
   					</td>
   				</tr>
   	    	</tbody>

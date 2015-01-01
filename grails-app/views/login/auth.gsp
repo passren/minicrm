@@ -8,19 +8,19 @@
     </head>
     <body>
         <div class="body">
-            <h1>用户登陆</h1>
             <g:if test='${flash.message}'>
                 <div class='errors'>${flash.message}</div>
             </g:if>
 
             <div class="loginForm">
             <form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
+            <h1>用户登陆</h1>
                 <table>
                     <tbody>
                         <tr class="prop">
-                            <td valign="top" class="name" width="40%"><label for="username">用户名</label></td>
+                            <td valign="top" class="name" width="45%"><label for="username">用户名</label></td>
                             <td valign="top" class="value">
-                                <input type='text' class='text_' name='j_username' id='username' />
+                                <input type='text' class='text_' name='j_username' id='username' value=''/>
                             </td>
                         </tr>
                         <tr class="prop">

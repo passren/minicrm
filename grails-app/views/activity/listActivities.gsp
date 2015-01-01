@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%
+    def valueSetService = grailsApplication.mainContext.getBean("valueSetService");
+%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -44,7 +48,7 @@ $(document).ready(function(){
                     </td>
                     <td>活动类型
                         <g:select name="search_activity_type"
-                              from="${activityTypes}"
+                              from="${valueSetService.getActivityType()}"
                               value="${searchCriteria?.search_activity_type}"
                               optionKey="id" 
                               optionValue="code1"
@@ -65,11 +69,11 @@ $(document).ready(function(){
         <thead>
             <tr>
                 <th style="width: 2%">序号</th>
-                <th style="width: 50%">活动概要</th>
-                <th style="width: 30%">客户名称</th>
+                <th style="width: 40%">活动概要</th>
+                <th style="width: 25%">客户名称</th>
                 <th style="width: 8%">活动类型</th>
-                <th style="width: 5%">创建日期</th>
-                <th style="width: 5%">更新日期</th>
+                <th style="width: 15%">创建日期</th>
+                <th style="width: 15%">更新日期</th>
             </tr>
         </thead>
         <tbody>
@@ -88,7 +92,7 @@ $(document).ready(function(){
     </div>
 
     <div class="paginate">
-
+      <span>记录数: ${activities.size()}</span>
     </div>
   </div>
 </body>

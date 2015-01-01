@@ -1,4 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%
+    def valueSetService = grailsApplication.mainContext.getBean("valueSetService");
+	def areaService = grailsApplication.mainContext.getBean("areaService");
+%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -41,7 +46,7 @@ $(document).ready(function(){
                         </td>
                         <td colspan="2">客户区域
                             <g:select name="search_customer_province"
-                              from="${provinces}"
+                              from="${areaService.getProvinces()}"
                               value="${searchCriteria?.search_customer_province}"
                               optionKey="id"
                               optionValue="name"
@@ -52,7 +57,7 @@ $(document).ready(function(){
                     <tr>
                         <td>客户类型 
                                 <g:select name="search_customer_category"
-                                  from="${categories}"
+                                  from="${valueSetService.getCustomerCategory()}"
                                   value="${searchCriteria?.search_customer_category}"
                                   optionKey="id" 
                                   optionValue="code1"
@@ -60,7 +65,7 @@ $(document).ready(function(){
                         </td>
                         <td>客户定级
                             <g:select name="search_customer_classification"
-                                      from="${classifications}"
+                                      from="${valueSetService.getCustomerClassification()}"
                                       value="${searchCriteria?.search_customer_classification}"
                                       optionKey="id" 
                                       optionValue="code1"
@@ -68,7 +73,7 @@ $(document).ready(function(){
                         </td>
                         <td>客户来源
                             <g:select name="search_customer_source"
-                                      from="${sources}"
+                                      from="${valueSetService.getCustomerSource()}"
                                       value="${searchCriteria?.search_customer_source}"
                                       optionKey="id" 
                                       optionValue="code1"
@@ -129,9 +134,9 @@ $(document).ready(function(){
 	</table>
   	</div>
   	
-  	<div class="paginate">
-
-  	</div>
+	<div class="paginate">
+	  <span>记录数: ${customers.size()}</span>
+	</div>
   </div>
 </body>
 </html>

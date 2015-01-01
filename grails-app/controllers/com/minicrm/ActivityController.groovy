@@ -2,8 +2,8 @@ package com.minicrm
 
 class ActivityController {
 
+	def springSecurityService
     def activityService
-    def valueSetService
 	
     def index() {
         redirect(action:"listActivities")
@@ -20,8 +20,7 @@ class ActivityController {
         }
 
         render(view:"listActivities", model:[activities:activities,
-                                                searchCriteria:searchCriteria,
-                                                activityTypes:valueSetService.getActivityType()])
+                                                searchCriteria:searchCriteria])
     }
 
     def viewActivity() {
@@ -34,15 +33,13 @@ class ActivityController {
     }
 
     def addActivity() {
-        render(view:"editActivity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD,
-                                            activityTypes:valueSetService.getActivityType()])
+        render(view:"editActivity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD])
     }
 
     def updateActivity() {
         def activity = Activity.get(params.id)
         render(view:"editActivity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE,
-                                            activity:activity,
-                                            activityTypes:valueSetService.getActivityType()])
+                                            activity:activity])
     }
 
     def saveActivity() {
@@ -52,22 +49,21 @@ class ActivityController {
             def customer = Customer.get(params.customerId)
             activity.customer = customer
             activity.createdDate = new Date()
-            activity.createUser = User.get(1)
+            activity.createUser = springSecurityService.currentUser
             activity.lastUpdatedDate = new Date()
-            activity.lastUpdateUser = User.get(1)
+            activity.lastUpdateUser = springSecurityService.currentUser
         } else if (params.actionFlag == ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE) {
             activity = Activity.get(params.id)
             activity.properties = params
             activity.lastUpdatedDate = new Date()
-            activity.lastUpdateUser = User.get(1)
+            activity.lastUpdateUser = springSecurityService.currentUser
         }
 
         if (activity.save(flush:true)) {
             redirect(action:"listActivities")
         } else {
             render(view:"editActivity", model:[actionFlag:params.actionFlag,
-                                                    activity:activity,
-                                                    activityTypes:valueSetService.getActivityType()])
+                                                    activity:activity])
         }
     }
 	

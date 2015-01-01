@@ -1,4 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%
+    def valueSetService = grailsApplication.mainContext.getBean("valueSetService");
+    def areaService = grailsApplication.mainContext.getBean("areaService");
+%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -75,7 +80,7 @@ $(document).ready(function(){
   					</td>
   					<td colspan="2"><label for="city">客户区域</label>
   						<g:select name="province"
-					          from="${provinces}"
+					          from="${areaService.getProvinces()}"
 					          value="${customer?.city?.province?.id}"
 					          optionKey="id"
 					          optionValue="name"
@@ -83,7 +88,7 @@ $(document).ready(function(){
 					          />
 					    -
 					    <g:select name="city"
-					          from="${cities}"
+					          from="${areaService.getCitiesByProvince(customer?.city?.province)}"
 					          value="${customer?.city?.id}"
 					          optionKey="id"
 					          optionValue="name"
@@ -99,7 +104,7 @@ $(document).ready(function(){
   				<tr>
   					<td><label for="category">客户类型</label>
   						<g:select name="category"
-					          from="${categories}"
+					          from="${valueSetService.getCustomerCategory()}"
 					          value="${customer?.category?.id}"
 					          optionKey="id"
 					          optionValue="code1"
@@ -108,7 +113,7 @@ $(document).ready(function(){
 	          		</td>
 	          		<td><label for="classification">客户定级</label>
 	          			<g:select name="classification"
-					          from="${classifications}"
+					          from="${valueSetService.getCustomerClassification()}"
 					          value="${customer?.classification?.id}"
 					          optionKey="id"
 					          optionValue="code1"
@@ -117,16 +122,16 @@ $(document).ready(function(){
 	          		</td>
 	          		<td><label for="source">客户来源</label>
 				  		<g:select name="source"
-					          from="${sources}"
+					          from="${valueSetService.getCustomerSource()}"
 					          value="${customer?.source?.id}"
 					          optionKey="id"
 					          optionValue="code1"
 					          noSelection="['':'']"
 					          />
 	          		</td>
-                                <td><label for="situation">客户来源</label>
+                                <td><label for="situation">最终情况</label>
 				  		<g:select name="situation"
-					          from="${situation}"
+					          from="${valueSetService.getCustomerSituation()}"
 					          value="${customer?.situation?.id}"
 					          optionKey="id"
 					          optionValue="code1"
@@ -137,7 +142,7 @@ $(document).ready(function(){
   				<tr>
                                         <td><label for="status">客户状态</label>
 	          			<g:select name="status"
-					          from="${status}"
+					          from="${valueSetService.getCustomerStatus()}"
 					          value="${customer?.status?.id}"
 					          optionKey="id"
 					          optionValue="code1"

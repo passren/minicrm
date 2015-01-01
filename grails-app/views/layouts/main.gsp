@@ -43,7 +43,8 @@
 			<h1>系统管理</h1>
 			<ul>
 				<li><asset:image src="link.gif" /> <g:link controller="admin" action="listUsers">用户管理</g:link></li>
-				<li><asset:image src="link.gif" /> <g:link controller="sales" action="listSales">销售人员</g:link></li>
+				<li><asset:image src="link.gif" /> <g:link controller="admin" action="listPersons">人员管理</g:link></li>
+				<li><asset:image src="link.gif" /> <g:link controller="admin" action="assignCustomer">客户分配</g:link></li>
 			</ul>
         </sec:ifAnyGranted>
 		</div>

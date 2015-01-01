@@ -1,5 +1,7 @@
 package com.minicrm
 
+import java.util.Date;
+
 class User {
 
 	transient springSecurityService
@@ -7,19 +9,23 @@ class User {
 	String username
 	String password
 	String realname
-	SalesPerson salesPerson
+	Person person
 	boolean enabled = true
-	boolean accountExpired
-	boolean accountLocked
-	boolean passwordExpired
-
+	boolean accountExpired = false
+	boolean accountLocked = false
+	boolean passwordExpired = false
+	Date createdDate
+	Date lastUpdatedDate
+	
 	static transients = ['springSecurityService']
 
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
 		realname blank: false
-		salesPerson nullable: true
+		person nullable: true
+		createdDate nullable: false
+		lastUpdatedDate nullable: false
 	}
 
 	static mapping = {

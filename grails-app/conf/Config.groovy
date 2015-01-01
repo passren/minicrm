@@ -129,9 +129,9 @@ grails {
             authority.className = 'com.minicrm.Role'
             securityConfigType = "InterceptUrlMap"
 			interceptUrlMap = [
-				'/':                  ['permitAll'],
-				'/index':             ['permitAll'],
-				'/index.gsp':         ['permitAll'],
+				'/':                  ['IS_AUTHENTICATED_REMEMBERED'],
+				'/index':             ['IS_AUTHENTICATED_REMEMBERED'],
+				'/index.gsp':         ['IS_AUTHENTICATED_REMEMBERED'],
 				'/assets/**':         ['permitAll'],
 				'/**/js/**':          ['permitAll'],
 				'/**/css/**':         ['permitAll'],
@@ -140,10 +140,11 @@ grails {
 				'/login/**':          ['permitAll'],
 				'/logout/**':         ['permitAll'],
 				'/admin/**':          [com.minicrm.ConstUtils.ROLE_ADMIN],
-				'/customer/**':          [com.minicrm.ConstUtils.ROLE_SALES, 'IS_AUTHENTICATED_REMEMBERED'],
-				'/activity/**':          [com.minicrm.ConstUtils.ROLE_SALES, 'IS_AUTHENTICATED_REMEMBERED'],
-				'/opportunity/**':       [com.minicrm.ConstUtils.ROLE_SALES, 'IS_AUTHENTICATED_REMEMBERED'],
-				'/serviceRequest/**':    [com.minicrm.ConstUtils.ROLE_SALES, 'IS_AUTHENTICATED_REMEMBERED']
+				'/customer/**':			[com.minicrm.ConstUtils.ROLE_SALES, com.minicrm.ConstUtils.ROLE_SALES_MANAGER, 'IS_AUTHENTICATED_REMEMBERED'],
+				'/activity/**':			[com.minicrm.ConstUtils.ROLE_SALES, com.minicrm.ConstUtils.ROLE_SALES_MANAGER, 'IS_AUTHENTICATED_REMEMBERED'],
+				'/opportunity/**':		[com.minicrm.ConstUtils.ROLE_SALES, com.minicrm.ConstUtils.ROLE_SALES_MANAGER, 'IS_AUTHENTICATED_REMEMBERED'],
+				'/serviceRequest/**':	[com.minicrm.ConstUtils.ROLE_SALES, com.minicrm.ConstUtils.ROLE_SALES_MANAGER, 'IS_AUTHENTICATED_REMEMBERED'],
+				'/errorHandler/**':		['IS_AUTHENTICATED_REMEMBERED']
 			]
         }
     }

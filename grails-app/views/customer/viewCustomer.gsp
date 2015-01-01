@@ -112,6 +112,10 @@
 	       </tbody>
 		</table>
   	</div>
+  	
+    <div class="paginate">
+      <span>记录数: ${contacts.size()}</span>
+    </div>
   </div>
 </body>
 </html>

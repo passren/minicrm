@@ -29,6 +29,8 @@ class ConstUtils {
 	public static final INVOICE_TYPE = "INVOICE_TYPE"
 	public static final SERVICE_CLASSIFICATION = "SERVICE_CLASSIFICATION"
 	public static final SERVICE_STATUS = "SERVICE_STATUS"
+	public static final PERSON_POSITION = "PERSON_POSITION"
+	public static final PERSON_STATUS = "PERSON_STATUS"
 
     public static final PAGE_MAX_RECORDS = 10
 

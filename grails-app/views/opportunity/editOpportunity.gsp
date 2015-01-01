@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%
+    def valueSetService = grailsApplication.mainContext.getBean("valueSetService");
+%>
 
 <html>
     <head>
@@ -101,7 +104,7 @@
                         <tr>
                             <td><label for="status">机会状态</label>
                                 <g:select name="status"
-                                          from="${status}"
+                                          from="${valueSetService.getOpportunityStatus()}"
                                           value="${opportunity?.status?.id}"
                                           optionKey="id"
                                           optionValue="code1"
@@ -117,7 +120,7 @@
                             </td>
                             <td colspan="2"><label for="product">购买内容</label>
                                 <g:select name="product"
-                                          from="${products}"
+                                          from="${valueSetService.getProductList()}"
                                           value="${opportunity?.product?.id}"
                                           optionKey="id"
                                           optionValue="code1"
@@ -142,7 +145,7 @@
                         <tr>
                             <td><label for="impStatus">实施状态</label>
                                 <g:select name="impStatus"
-                                          from="${impStatus}"
+                                          from="${valueSetService.getImplementStatus()}"
                                           value="${opportunity?.impStatus?.id}"
                                           optionKey="id"
                                           optionValue="code1"
