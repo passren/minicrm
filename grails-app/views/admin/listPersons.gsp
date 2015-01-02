@@ -53,7 +53,7 @@ $(document).ready(function() {
 		</table>
 	</div>
 	<div class="paginate">
-	    <span>Total Records: ${persons.size()}</span>
+	    <span>记录数: ${persons.size()}</span>
 	</div>
 </body>
 </html>

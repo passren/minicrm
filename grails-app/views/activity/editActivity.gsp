@@ -84,7 +84,7 @@ $(document).ready(function(){
   			<tbody>
   				<tr>
   					<td colspan="4"><label for="customerName">客户名称</label>
-  						<g:textField id="customerName" name="customerName" value="${activity?.customer?.name}" size="40" readonly="true"/>
+  						<g:textField id="customerName" name="customerName" value="${activity?.customer?.name}" size="40" readonly="true"/>*
   						
   						<g:if test="${actionFlag == 'A'}">
   							<a id="linkSearchCustomer" href="#">查找客户</a>
@@ -100,7 +100,7 @@ $(document).ready(function(){
   				</tr>
   				<tr>
   					<td colspan="3"><label for="summary">活动概要</label>
-  						<g:textField name="summary" value="${activity?.summary}" size="40"/>
+  						<g:textField name="summary" value="${activity?.summary}" size="40"/>*
   					</td>
   					<td><label for="type">活动类型</label>
 	  					<g:select name="type"
@@ -109,7 +109,7 @@ $(document).ready(function(){
 						          optionKey="id"
 						          optionValue="code1"
 						          noSelection="['':'']"
-						          />
+						          />*
   					</td>
   				</tr>
   				<tr>

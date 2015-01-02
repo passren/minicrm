@@ -2,8 +2,9 @@ package com.minicrm
 
 class ActivityController {
 
-	def springSecurityService
+    def springSecurityService
     def activityService
+    def customerService
 	
     def index() {
         redirect(action:"listActivities")
@@ -11,22 +12,17 @@ class ActivityController {
 	
     def listActivities() {
         def searchCriteria = ControllerUtils.buildSearchCriteria(params)
-
-        def activities
-        if(searchCriteria.size() == 0) {
-            activities = Activity.list(params)
-        } else {
-            activities = activityService.findActivityByCriteria(searchCriteria)
-        }
-
+        def activities = activityService.findActivityByCriteria(searchCriteria)
         render(view:"listActivities", model:[activities:activities,
-                                                searchCriteria:searchCriteria])
+                searchCriteria:searchCriteria])
     }
 
     def viewActivity() {
-        def activity = Activity.get(params.id)
+        def activity = Activity.read(params.id)
         if(activity == null) {
             redirect(controller:"errorHandler", action:"showObjectNotFound")
+        } else if(!customerService.checkAccessable(activity.customer)) {
+            redirect(controller:"errorHandler", action:"showNoAccessable")
         } else {
             render(view:"viewActivity", model:[activity:activity])
         }
@@ -37,9 +33,16 @@ class ActivityController {
     }
 
     def updateActivity() {
-        def activity = Activity.get(params.id)
-        render(view:"editActivity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE,
-                                            activity:activity])
+        def activity = Activity.load(params.id)
+        
+        if(activity == null) {
+            redirect(controller:"errorHandler", action:"showObjectNotFound")
+        } else if(!customerService.checkAccessable(activity.customer)) {
+            redirect(controller:"errorHandler", action:"showNoAccessable")
+        } else {
+            render(view:"editActivity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE,
+                    activity:activity])
+        }
     }
 
     def saveActivity() {
@@ -53,7 +56,7 @@ class ActivityController {
             activity.lastUpdatedDate = new Date()
             activity.lastUpdateUser = springSecurityService.currentUser
         } else if (params.actionFlag == ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE) {
-            activity = Activity.get(params.id)
+            activity = Activity.load(params.id)
             activity.properties = params
             activity.lastUpdatedDate = new Date()
             activity.lastUpdateUser = springSecurityService.currentUser
@@ -63,14 +66,20 @@ class ActivityController {
             redirect(action:"listActivities")
         } else {
             render(view:"editActivity", model:[actionFlag:params.actionFlag,
-                                                    activity:activity])
+                    activity:activity])
         }
     }
 	
-	def deleteActivity() {
-		def activity = Activity.get(params.id)
-		
-		activity.delete(flush:true)
-		redirect(action:"listActivities")
-	}
+    def deleteActivity() {
+        def activity = Activity.load(params.id)
+
+        if(activity == null) {
+            redirect(controller:"errorHandler", action:"showObjectNotFound")
+        } else if(!customerService.checkAccessable(activity.customer)) {
+            redirect(controller:"errorHandler", action:"showNoAccessable")
+        } else {
+            activity.delete(flush:true)
+            redirect(action:"listActivities")
+        }
+    }
 }

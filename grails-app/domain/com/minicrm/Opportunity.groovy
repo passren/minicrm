@@ -34,7 +34,7 @@ class Opportunity {
     }
     
     static constraints = {
-        status blank:false
+        status nullable:false
         possibility nullable:false
         product nullable:false
         signedDate nullable:true

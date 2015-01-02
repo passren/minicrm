@@ -46,4 +46,9 @@ class Customer {
 	Set<Person> getAssignedPersons() {
 		PersonCustomer.findAllByCustomer(this).collect { it.person }
 	}
+	
+	Set<User> getAssignedUsers() {
+		def lstPerson = PersonCustomer.findAllByCustomer(this).collect { it.person }
+		lstPerson.collect { it.user }
+	}
 }

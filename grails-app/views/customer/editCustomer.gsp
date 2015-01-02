@@ -76,7 +76,7 @@ $(document).ready(function(){
   			<tbody>
   				<tr>
   					<td colspan="2"><label for="name">客户名称</label>
-  						<g:textField name="name" value="${customer?.name}" size="40"/>
+  						<g:textField name="name" value="${customer?.name}" size="40"/>*
   					</td>
   					<td colspan="2"><label for="city">客户区域</label>
   						<g:select name="province"
@@ -93,7 +93,7 @@ $(document).ready(function(){
 					          optionKey="id"
 					          optionValue="name"
 					          noSelection="['':'']"
-					          />
+					          />*
   					</td>
   				</tr>
   				<tr>
@@ -147,7 +147,7 @@ $(document).ready(function(){
 					          optionKey="id"
 					          optionValue="code1"
 					          noSelection="['':'']"
-					          />
+					          />*
                                         </td>
   					<td colspan="3"><label for="remark">备注信息</label>
 						<g:textField name="remark" value="${customer?.remark}" size="80"/>

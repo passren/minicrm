@@ -5,6 +5,10 @@ import grails.transaction.Transactional
 @Transactional
 class ValueSetService {
 
+    def Set<String> getAllCategories() {
+        return ValueSet.list().collect { it.category }
+    }
+    
     def Set<ValueSet> getByCategory(String category) {
         ValueSet.findAllByCategory(category, [sort:"code", order:"asc"])
     }

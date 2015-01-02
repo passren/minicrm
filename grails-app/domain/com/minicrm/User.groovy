@@ -2,51 +2,68 @@ package com.minicrm
 
 import java.util.Date;
 
-class User {
+import org.apache.commons.lang.builder.HashCodeBuilder
 
-	transient springSecurityService
+class User implements Serializable {
 
-	String username
-	String password
-	String realname
-	Person person
-	boolean enabled = true
-	boolean accountExpired = false
-	boolean accountLocked = false
-	boolean passwordExpired = false
-	Date createdDate
-	Date lastUpdatedDate
+    private static final long serialVersionUID = 1
+    
+    transient springSecurityService
+
+    String username
+    String password
+    String realname
+    Person person
+    boolean enabled = true
+    boolean accountExpired = false
+    boolean accountLocked = false
+    boolean passwordExpired = false
+    Date createdDate
+    Date lastUpdatedDate
 	
-	static transients = ['springSecurityService']
+    static transients = ['springSecurityService']
 
-	static constraints = {
-		username blank: false, unique: true
-		password blank: false
-		realname blank: false
-		person nullable: true
-		createdDate nullable: false
-		lastUpdatedDate nullable: false
-	}
+    static constraints = {
+        username blank: false, unique: true, maxSize:20
+        password blank: false
+        realname blank: false, maxSize:50
+        person nullable: true
+        createdDate nullable: false
+        lastUpdatedDate nullable: false
+    }
 
-	static mapping = {
-		password column: '`password`'
-	}
+    static mapping = {
+        password column: '`password`'
+    }
 
-	Set<Role> getAuthorities() {
-		UserRole.findAllByUser(this).collect { it.role }
-	}
+    boolean equals(other) {
+        if (!(other instanceof User)) {
+            return false
+        }
+        
+        other.id == id
+    }
+    
+    int hashCode() {
+        def builder = new HashCodeBuilder().append(id)
+        builder.toHashCode()
+    }
+    
+    Set<Role> getAuthorities() {
+        UserRole.findAllByUser(this).collect { it.role }
+    }
 
-	def beforeInsert() {
-		encodePassword()
-	}
+    def beforeInsert() {
+        encodePassword()
+    }
 
-	def beforeUpdate() {
-		if (isDirty('password')) {
-			encodePassword()
-		}
-	}
+    def beforeUpdate() {
+        if (isDirty('password')) {
+            encodePassword()
+        }
+    }
 
-	protected void encodePassword() {
-		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
-	}
+    protected void encodePassword() {
+        password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
+    }
 }

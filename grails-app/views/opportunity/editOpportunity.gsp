@@ -87,7 +87,7 @@
                     <tbody>
                         <tr>
                             <td colspan="4"><label for="customerName">客户名称</label>
-                                <g:textField id="customerName" name="customerName" value="${opportunity?.customer?.name}" size="40" readonly="true"/>
+                                <g:textField id="customerName" name="customerName" value="${opportunity?.customer?.name}" size="40" readonly="true"/>*
 
                                 <g:if test="${actionFlag == 'A'}">
                                     <a id="linkSearchCustomer" href="#">查找客户</a>
@@ -109,14 +109,14 @@
                                           optionKey="id"
                                           optionValue="code1"
                                           noSelection="['':'']"
-                                          />
+                                          />*
                             </td>
                             <td><label for="possibility">可能性</label>
                                 <g:select name="possibility"
                                           from="${[0,10,20,30,40,50,60,70,80,90,100]}"
                                           value="${opportunity?.possibility}"
                                           noSelection="['':'']"
-                                          />%
+                                          />% *
                             </td>
                             <td colspan="2"><label for="product">购买内容</label>
                                 <g:select name="product"
@@ -125,7 +125,7 @@
                                           optionKey="id"
                                           optionValue="code1"
                                           noSelection="['':'']"
-                                          />
+                                          />*
                             </td>
                         </tr>
                         <tr>
