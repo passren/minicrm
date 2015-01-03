@@ -1,4 +1,4 @@
---Province
+/*Province*/
 insert into province(name,sort,remark) values('北京市','1','直辖市');
 insert into province(name,sort,remark) values('天津市','2','直辖市');
 insert into province(name,sort,remark) values('河北省','5','省份');
@@ -34,7 +34,7 @@ insert into province(name,sort,remark) values('台湾省','7','省份');
 insert into province(name,sort,remark) values('澳门特别行政区','33','特别行政区');
 insert into province(name,sort,remark) values('香港特别行政区','34','特别行政区');
 
---City
+/*City*/
 insert into city(name,province_id,sort) values('北京市','1','1');
 insert into city(name,province_id,sort) values('天津市','2','2');
 insert into city(name,province_id,sort) values('上海市','9','3');
