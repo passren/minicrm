@@ -107,25 +107,6 @@ class AdminController {
 		
         redirect(action:"listPersons")
     }
-	
-    def listPersonsForAssignment() {
-        def persons = Person.list(params)
-        render(view:"listPersonsForAssignment", model:[persons:persons])
-    }
-	
-    def assginCustomerForPerson() {
-        def person = Person.read(params.id)
-        render(view:"assginCustomer", model:[person:person])
-    }
-	
-    def saveCustomerAssignment() {
-        def person = Person.read(params.id)
-        def customerIds = params.customerIds
-        def lstCustomerId = customerIds.split(",").collect { it.toInteger() }
-		
-        adminService.saveCustomerAssignement(person, lstCustomerId as Set)
-        redirect(action:"assginCustomerForPerson", params: [id:params.id])
-    }
         
     def listValueSets() {
         def listByCategory = params.search_valueset_category

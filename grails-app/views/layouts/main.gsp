@@ -38,17 +38,19 @@
             <li><asset:image src="link.gif" /> <g:link controller="activity">销售活动</g:link></li>
             <li><asset:image src="link.gif" /> <g:link controller="opportunity">机会跟踪</g:link></li>
             <li><asset:image src="link.gif" /> <g:link controller="serviceRequest">售后服务</g:link></li>
-            </ul>
-            <sec:ifAnyGranted roles="${com.minicrm.ConstUtils.ROLE_ADMIN}">
+            <sec:ifAnyGranted roles="${com.minicrm.ConstUtils.ROLE_SALES_MANAGER}, ${com.minicrm.ConstUtils.ROLE_ADMIN}">
+                <li><asset:image src="link.gif" /> <g:link controller="customer" action="listPersonsForAssignment">客户分配</g:link></li>
+            </sec:ifAnyGranted>
+        </ul>
+        <sec:ifAnyGranted roles="${com.minicrm.ConstUtils.ROLE_ADMIN}">
             <h1>系统管理</h1>
             <ul>
                 <li><asset:image src="link.gif" /> <g:link controller="admin" action="listUsers">用户管理</g:link></li>
                 <li><asset:image src="link.gif" /> <g:link controller="admin" action="listPersons">人员管理</g:link></li>
-                <li><asset:image src="link.gif" /> <g:link controller="admin" action="listPersonsForAssignment">客户分配</g:link></li>
                 <li><asset:image src="link.gif" /> <g:link controller="admin" action="listValueSets">值集维护</g:link></li>
-                </ul>
-            </sec:ifAnyGranted>
-        </div>
+            </ul>
+        </sec:ifAnyGranted>
+    </div>
 
     <div id="page-body" role="main">
         <g:layoutBody/>

@@ -41,16 +41,6 @@ class AdminService {
             p.delete(flush:true)
         }
     }
-	
-    def saveCustomerAssignement(Person person, Set<Integer> customerIds) {
-        PersonCustomer.removeAll(person)
-        customerIds.each {
-            def c = Customer.load(it)
-            def p = Person.load(person.id)
-            PersonCustomer.create(c, p)
-        }
-        PersonCustomer.withSession { it.flush() }
-    }
 
     def isSalesManagerRole(User user) {
         boolean managerRole = false

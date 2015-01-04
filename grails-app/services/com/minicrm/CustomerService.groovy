@@ -94,4 +94,14 @@ class CustomerService {
     def checkAccessable(Customer customer) {
         checkAccessable(customer, springSecurityService.currentUser)
     }
+    
+    def saveCustomerAssignement(Person person, Set<Integer> customerIds) {
+        PersonCustomer.removeAll(person)
+        customerIds.each {
+            def c = Customer.load(it)
+            def p = Person.load(person.id)
+            PersonCustomer.create(c, p)
+        }
+        PersonCustomer.withSession { it.flush() }
+    }
 }

@@ -164,4 +164,23 @@ class CustomerController {
                     contact:contact])
         }
     }
+    
+    def listPersonsForAssignment() {
+        def persons = Person.list(params)
+        render(view:"listPersonsForAssignment", model:[persons:persons])
+    }
+	
+    def assginCustomerForPerson() {
+        def person = Person.read(params.id)
+        render(view:"assginCustomer", model:[person:person])
+    }
+	
+    def saveCustomerAssignment() {
+        def person = Person.read(params.id)
+        def customerIds = params.customerIds
+        def lstCustomerId = customerIds.split(",").collect { it.toInteger() }
+		
+        customerService.saveCustomerAssignement(person, lstCustomerId as Set)
+        redirect(action:"assginCustomerForPerson", params: [id:params.id])
+    }
 }
