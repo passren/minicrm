@@ -1,6 +1,6 @@
-INSERT INTO `role` (`authority`, `description`) VALUES ('ROLE_ADMIN', '管理员');
-INSERT INTO `role` (`authority`, `description`) VALUES ('ROLE_SALES', '销售人员');
-INSERT INTO `role` (`authority`, `description`) VALUES ('ROLE_SALES_MANAGER', '销售经理');
+INSERT INTO `role` (`version`, `authority`, `description`) VALUES (0, 'ROLE_ADMIN', '管理员');
+INSERT INTO `role` (`version`, `authority`, `description`) VALUES (0, 'ROLE_SALES', '销售人员');
+INSERT INTO `role` (`version`, `authority`, `description`) VALUES (0, 'ROLE_SALES_MANAGER', '销售经理');
 
 INSERT INTO `user`
 (`version`,`password_expired`,`account_expired`,`account_locked`,`enabled`,
