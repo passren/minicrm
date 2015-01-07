@@ -38,7 +38,7 @@
             <li><asset:image src="link.gif" /> <g:link controller="activity">销售活动</g:link></li>
             <li><asset:image src="link.gif" /> <g:link controller="opportunity">机会跟踪</g:link></li>
             <li><asset:image src="link.gif" /> <g:link controller="serviceRequest">售后服务</g:link></li>
-            <sec:ifAnyGranted roles="${com.minicrm.ConstUtils.ROLE_SALES_MANAGER}, ${com.minicrm.ConstUtils.ROLE_ADMIN}">
+            <sec:ifAnyGranted roles="${com.minicrm.ConstUtils.ROLE_SALES_MANAGER}, ${com.minicrm.ConstUtils.ROLE_ADMIN}, ${com.minicrm.ConstUtils.ROLE_GENERAL_MANAGER}">
                 <li><asset:image src="link.gif" /> <g:link controller="customer" action="listPersonsForAssignment">客户分配</g:link></li>
             </sec:ifAnyGranted>
         </ul>

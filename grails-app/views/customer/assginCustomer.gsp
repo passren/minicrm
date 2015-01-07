@@ -64,7 +64,7 @@ $(document).ready(function(){
     });
     
     $("#btnSearchCustomer").click(function(){
-    	var url = "${createLink(controller:'customer', action:'getAllCustomersAsJson', absolute:true)}";
+    	var url = "${createLink(controller:'customer', action:'getCustomersAsJson', absolute:true)}";
         searchCustomer(url);
     });
 

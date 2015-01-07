@@ -14,7 +14,9 @@ class ServiceRequestService {
     def Set<ServiceRequest> findServiceRequestByCriteria(Map criteriaMap, boolean restricted=true) {
         def criteria = ServiceRequest.createCriteria()
         def user = springSecurityService.currentUser
-        restricted = !adminService.isSalesManagerRole()
+		if(restricted) {
+			restricted = !adminService.hasFullCustomerAccess(user)
+		}
 		
         return criteria {
             if(restricted) {

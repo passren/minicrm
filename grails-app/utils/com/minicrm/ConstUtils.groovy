@@ -14,6 +14,7 @@ class ConstUtils {
 
     public static final ROLE_ADMIN = "ROLE_ADMIN"
     public static final ROLE_SALES_MANAGER = "ROLE_SALES_MANAGER"
+	public static final ROLE_GENERAL_MANAGER = "ROLE_GENERAL_MANAGER"
     public static final ROLE_SALES = "ROLE_SALES"
 
     public static final CUSTOMER_CATEGORY = "CUSTOMER_CATEGORY"

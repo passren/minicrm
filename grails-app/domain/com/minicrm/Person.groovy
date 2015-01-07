@@ -1,8 +1,12 @@
 package com.minicrm
 
+import java.io.Serializable;
 import java.util.Date;
+import org.apache.commons.lang.builder.HashCodeBuilder
 
-class Person {
+class Person implements Serializable {
+	
+	private static final long serialVersionUID = 1
 	
     String name
     String jobnumber
@@ -35,4 +39,17 @@ class Person {
         order "desc"
         cache true
     }
+	
+	boolean equals(other) {
+		if (!(other instanceof Person)) {
+			return false
+		}
+		
+		other.id == id
+	}
+	
+	int hashCode() {
+		def builder = new HashCodeBuilder().append(id)
+		builder.toHashCode()
+	}
 }

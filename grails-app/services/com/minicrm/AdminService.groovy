@@ -69,4 +69,26 @@ class AdminService {
     def isSalesRole() {
         isSalesRole(springSecurityService.currentUser)
     }
+	
+	def isGeneralManagerRole(User user) {
+		boolean gmRole = false
+		user?.authorities.each {
+			if(it.authority == ConstUtils.ROLE_GENERAL_MANAGER) {
+				gmRole = true
+			}
+		}
+		gmRole
+	}
+	
+	def isGeneralManagerRole() {
+		isGeneralManagerRole(springSecurityService.currentUser)
+	}
+	
+	def hasFullCustomerAccess() {
+		isGeneralManagerRole()
+	}
+	
+	def hasFullCustomerAccess(User user) {
+		isGeneralManagerRole(user)
+	}
 }

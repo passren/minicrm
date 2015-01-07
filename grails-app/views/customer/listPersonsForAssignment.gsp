@@ -24,10 +24,10 @@
                     <tr>
                         <g:sortableColumn property="id" title="序号" style="width: 5%"/>
                         <g:sortableColumn property="name" title="姓名" style="width: 15%"/>
-                        <g:sortableColumn property="assigned" title="分配数量" style="width: 10%"/>
+                        <th style="width: 10%">分配数量</th>
                         <g:sortableColumn property="jobnumber" title="工号" style="width: 15%"/>
-                        <g:sortableColumn property="username" title="登陆名" style="width: 15%"/>
-                        <g:sortableColumn property="role" title="角色" style="width: 15%"/>
+                        <th style="width: 15%">登陆名</th>
+                        <th style="width: 15%">角色</th>
                         <g:sortableColumn property="createdDate" title="创建日期" style="width: 10%"/>
                         <g:sortableColumn property="lastUpdatedDate" title="更新日期" style="width: 10%"/>
                     </tr>
@@ -51,7 +51,7 @@
             </table>
         </div>
         <div class="paginate">
-            <span>记录数: ${persons.size()}</span>
+            <span>记录数: ${persons?.size()}</span>
         </div>
     </body>
 </html>

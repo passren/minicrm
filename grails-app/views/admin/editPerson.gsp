@@ -2,6 +2,9 @@
 <%@ page import="com.minicrm.*" %>
 <%
 def valueSetService = grailsApplication.mainContext.getBean("valueSetService");
+def personService = grailsApplication.mainContext.getBean("personService");
+def supervisors = personService.getPersonsWithoutSelf(person);
+supervisors = supervisors==null ? Person.list() : supervisors
 %>
 
 <html>
@@ -79,8 +82,8 @@ def valueSetService = grailsApplication.mainContext.getBean("valueSetService");
                                         />
                                 </td>
                                 <td colspan="2"><label for="supervisor">主管</label>
-                                    <g:select name="position"
-                                    from="${Person.list()}"
+                                    <g:select name="supervisor"
+                                    from="${supervisors}"
                                     value="${person?.supervisor?.id}"
                                         optionKey="id"
                                         optionValue="name"

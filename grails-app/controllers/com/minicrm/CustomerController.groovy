@@ -7,6 +7,7 @@ class CustomerController {
     def springSecurityService
     def customerService
     def areaService
+	def personService
 
     def index() {
         redirect(action:"listCustomers")
@@ -22,17 +23,6 @@ class CustomerController {
     def getCustomersAsJson() {
         def searchCriteria = ControllerUtils.buildSearchCriteria(params)
         def customers = customerService.findCustomerByCriteria(searchCriteria)
-
-        render(contentType: "application/json") {
-            customers.collect {
-                [id:it.id, name:it.name, address:it.address]
-            }
-        }
-    }
-        
-    def getAllCustomersAsJson() {
-        def searchCriteria = ControllerUtils.buildSearchCriteria(params)
-        def customers = customerService.findCustomerByCriteria(searchCriteria, false)
 
         render(contentType: "application/json") {
             customers.collect {
@@ -166,7 +156,7 @@ class CustomerController {
     }
     
     def listPersonsForAssignment() {
-        def persons = Person.list(params)
+        def persons = personService.getStaffofManager(springSecurityService.currentUser, params)
         render(view:"listPersonsForAssignment", model:[persons:persons])
     }
 	

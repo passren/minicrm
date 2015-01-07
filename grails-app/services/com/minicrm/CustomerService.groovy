@@ -11,7 +11,9 @@ class CustomerService {
     def Set<Customer> findCustomerByCriteria(Map criteriaMap, boolean restricted=true) {
         def criteria = Customer.createCriteria()
         def user = springSecurityService.currentUser
-        restricted = !adminService.isSalesManagerRole()
+        if(restricted) {
+			restricted = !adminService.hasFullCustomerAccess(user)
+        }
 		
         return criteria {
             if(restricted) {
@@ -78,7 +80,7 @@ class CustomerService {
         def accessable = false
 
         def c = customer?.read(customer.id)
-        if (adminService.isSalesManagerRole(user)) {
+        if (adminService.hasFullCustomerAccess(user)) {
             accessable = true
         } else {
             c?.assignedUsers.each {
