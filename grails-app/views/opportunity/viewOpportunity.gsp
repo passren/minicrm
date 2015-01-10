@@ -11,7 +11,7 @@
             <div class="toolbar">
                 <g:link action="listOpportunities">返回</g:link>
                 <g:link action="updateOpportunity" id="${opportunity.id}">更新机会</g:link>
-                <g:link controller="activity" action="addActivity" id="${opportunity.id}">创建活动</g:link>
+                <g:link action="addActivity" id="${opportunity.id}">创建活动</g:link>
                 <g:link action="addReceivable" id="${opportunity.id}">创建收款</g:link>
                 <g:link action="addInvoice" id="${opportunity.id}">创建发票</g:link>
             </div>

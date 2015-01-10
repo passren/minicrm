@@ -95,13 +95,12 @@ $(document).ready(function(){
   					<td colspan="4"><label for="customerName">客户名称</label>
   						<g:textField id="customerName" name="customerName" value="${customerName}" size="40" readonly="true"/>*
   						
-  						<g:if test="${customerId==''}">
+  						<g:if test="${customerId==null || customerId.toString().isEmpty()}">
   							<a id="linkSearchCustomer" href="#">查找客户</a>
   						</g:if>
-  						
-  						<g:if test="${customerId!=''}">
-  							<g:link controller="customer" action="viewCustomer" id="${customerId}">客户信息</g:link>
-  						</g:if>
+  						<g:else>
+  						    <g:link controller="customer" action="viewCustomer" id="${customerId}">客户信息</g:link>
+  						</g:else>
   					</td>
   				</tr>
   				<tr>
