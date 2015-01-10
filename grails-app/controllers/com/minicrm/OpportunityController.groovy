@@ -24,7 +24,8 @@ class OpportunityController {
         } else if(!customerService.checkAccessable(opportunity.customer)) {
             redirect(controller:"errorHandler", action:"showNoAccessable")
         } else {
-            render(view:"viewOpportunity", model:[opportunity:opportunity])
+			def activities = OpportunityActivity.findAllByOpportunity(opportunity).collect{ it.activity }
+            render(view:"viewOpportunity", model:[opportunity:opportunity, activities:activities])
         }
     }
     
@@ -74,6 +75,12 @@ class OpportunityController {
                     opportunity:opportunity])
         }
     }
+	
+	def addActivity() {
+		def opportunity = Opportunity.read(params.id)
+		render(controller:"activity", view:"editActivity", model:[opportunity:opportunity, 
+											actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD])
+	}
 	
     def viewReceivable() {
         def receivable = Receivable.read(params.id)

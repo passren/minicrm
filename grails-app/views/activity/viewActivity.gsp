@@ -80,6 +80,11 @@ $(document).ready(function(){
   	    	</tbody>
   	    </table>
  	</div>
+ 	
+ 	<div id="listOpportunities">
+        <g:render template="listOpportunities" model="[opportunities:opportunities]" />
+ 	</div>
+ 	
   </div>
 </body>
 </html>

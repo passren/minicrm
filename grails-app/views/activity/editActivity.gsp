@@ -1,6 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
     def valueSetService = grailsApplication.mainContext.getBean("valueSetService");
+	def customerId, customerName
+	if(opportunity != null) {
+        customerId = opportunity.customer.id
+		customerName = opportunity.customer.name
+	} else {
+	    customerId = activity?.customer?.id
+		customerName = activity?.customer?.name
+	}
 %>
 
 <html>
@@ -75,7 +83,8 @@ $(document).ready(function(){
  	<div class="form">
   	  <g:form name="formActivity" action="saveActivity">
   	    <input type="hidden" id="id" name="id" value="${activity?.id}"/>
-  	    <input type="hidden" id="customerId" name="customerId" value="${activity?.customer?.id}"/>
+  	    <input type="hidden" id="customerId" name="customerId" value="${customerId}"/>
+  	    <input type="hidden" id="opportunityId" name="opportunityId" value="${opportunity?.id}"/>
   	    <input type="hidden" id="actionFlag" name="actionFlag" value="${actionFlag}"/>
   	    
   		<table>
@@ -84,14 +93,14 @@ $(document).ready(function(){
   			<tbody>
   				<tr>
   					<td colspan="4"><label for="customerName">客户名称</label>
-  						<g:textField id="customerName" name="customerName" value="${activity?.customer?.name}" size="40" readonly="true"/>*
+  						<g:textField id="customerName" name="customerName" value="${customerName}" size="40" readonly="true"/>*
   						
-  						<g:if test="${actionFlag == 'A'}">
+  						<g:if test="${customerId==''}">
   							<a id="linkSearchCustomer" href="#">查找客户</a>
   						</g:if>
   						
-  						<g:if test="${actionFlag == 'U'}">
-  							<g:link controller="customer" action="viewCustomer" id="${activity.customer.id}" target="_blank">客户信息</g:link>
+  						<g:if test="${customerId!=''}">
+  							<g:link controller="customer" action="viewCustomer" id="${customerId}">客户信息</g:link>
   						</g:if>
   					</td>
   				</tr>

@@ -19,12 +19,14 @@ class ActivityController {
 
     def viewActivity() {
         def activity = Activity.read(params.id)
+
         if(activity == null) {
             redirect(controller:"errorHandler", action:"showObjectNotFound")
         } else if(!customerService.checkAccessable(activity.customer)) {
             redirect(controller:"errorHandler", action:"showNoAccessable")
         } else {
-            render(view:"viewActivity", model:[activity:activity])
+			def opportunities = OpportunityActivity.findAllByActivity(activity).collect{ it.opportunity }
+            render(view:"viewActivity", model:[activity:activity, opportunities:opportunities])
         }
     }
 
@@ -47,9 +49,11 @@ class ActivityController {
 
     def saveActivity() {
         def activity
+		def opportunity
         if (params.actionFlag == ConstUtils.CONTROLLER_ACTION_FLAG_ADD) {
             activity = new Activity(params)
             def customer = Customer.get(params.customerId)
+			opportunity = Opportunity.get(params.opportunityId)
             activity.customer = customer
             activity.createdDate = new Date()
             activity.createUser = springSecurityService.currentUser
@@ -63,7 +67,13 @@ class ActivityController {
         }
 
         if (activity.save(flush:true)) {
-            redirect(action:"listActivities")
+			if(opportunity != null) {
+				OpportunityActivity.create(opportunity, activity)
+				redirect(controller:"opportunity", action:"viewOpportunity", id:opportunity.id)
+			} else {
+				redirect(action:"listActivities")
+			}
+            
         } else {
             render(view:"editActivity", model:[actionFlag:params.actionFlag,
                     activity:activity])
