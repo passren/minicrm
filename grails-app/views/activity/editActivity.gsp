@@ -1,14 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
     def valueSetService = grailsApplication.mainContext.getBean("valueSetService");
-	def customerId, customerName
-	if(opportunity != null) {
+    def customerId, customerName
+    if(opportunity != null) {
         customerId = opportunity.customer.id
-		customerName = opportunity.customer.name
-	} else {
-	    customerId = activity?.customer?.id
-		customerName = activity?.customer?.name
-	}
+        customerName = opportunity.customer.name
+    } else {
+        customerId = activity?.customer?.id
+        customerName = activity?.customer?.name
+    }
 %>
 
 <html>
@@ -23,7 +23,12 @@
 $(document).ready(function(){
 	$("#linkBack").click(function(){
             if(!confirm("尚未保存,确认返回？")) return false;
+            <g:if test="opportunity!=null">
+            location="<g:createLink action='viewOpportunity' id='${opportunity.id}'/>";
+            </g:if>
+            <g:else>
             location="<g:createLink action='listActivities'/>";
+            </g:else>
 	});
 	
 	$("#linkSaveForm").click(function(){

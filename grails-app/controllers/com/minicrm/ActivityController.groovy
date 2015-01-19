@@ -29,7 +29,7 @@ class ActivityController {
             render(view:"viewActivity", model:[activity:activity, opportunities:opportunities])
         }
     }
-
+	
     def addActivity() {
         render(view:"editActivity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD])
     }

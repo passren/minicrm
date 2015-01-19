@@ -78,8 +78,19 @@ class OpportunityController {
 	
 	def addActivity() {
 		def opportunity = Opportunity.read(params.id)
-		render(controller:"activity", view:"editActivity", model:[opportunity:opportunity, 
-											actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD])
+		render(view:"../activity/editActivity", model:[opportunity:opportunity, actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD])
+	}
+	
+	def updateActivity() {
+		
+	}
+	
+	def deleteActivity() {
+		
+	}
+	
+	def saveActivity() {
+		
 	}
 	
     def viewReceivable() {
