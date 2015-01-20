@@ -35,13 +35,12 @@ class ActivityController {
 
     def updateActivity() {
         def activity = Activity.load(params.id)
-        def oa = OpportunityActivity.findByActivity(activity)
-        
         if(activity == null) {
             redirect(controller:"errorHandler", action:"showObjectNotFound")
         } else if(!customerService.checkAccessable(activity.customer)) {
             redirect(controller:"errorHandler", action:"showNoAccessable")
         } else {
+			def oa = OpportunityActivity.findByActivity(activity)
             render(view:"editActivity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE, entrance:"Activity",
                                                             opportunity:oa?.opportunity, activity:activity])
         }
