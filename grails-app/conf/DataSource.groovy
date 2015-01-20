@@ -67,7 +67,7 @@ environments {
             driverClassName = "com.mysql.jdbc.Driver"
             dialect = org.hibernate.dialect.MySQL5InnoDBDialect
             username = "minicrm"
-            password = "minicrm"
+            password = "fdiur873"
             properties {
                 maxActive = 50
                 maxIdle = 25
