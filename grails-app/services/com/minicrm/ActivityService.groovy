@@ -52,4 +52,41 @@ class ActivityService {
             }
         }
     }
+    
+    def saveActivity(Activity activity) {
+        if(activity==null) return false
+        
+        activity.lastUpdatedDate = new Date()
+        activity.lastUpdateUser = springSecurityService.currentUser
+        return activity.save(flush:true)
+    }
+    
+    def saveActivity(Activity activity, Opportunity opportunity) {
+        if(activity==null) return false
+        
+        def success = false
+        activity.lastUpdatedDate = new Date()
+        activity.lastUpdateUser = springSecurityService.currentUser
+        
+        if(activity.save() && opportunity!=null) {
+            OpportunityActivity.create(opportunity, activity)
+            Activity.withSession { it.flush() }
+            success = true
+        }
+        
+        success
+    }
+    
+    def deleteActivity(Activity activity) {
+        if(activity==null) return false
+        
+        def success = false
+        if(activity.delete()) {
+            OpportunityActivity.removeAll(activity)
+            Activity.withSession { it.flush() }
+            success = true
+        }
+        
+        success
+    }
 }

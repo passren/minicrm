@@ -23,7 +23,7 @@
 $(document).ready(function(){
 	$("#linkBack").click(function(){
             if(!confirm("尚未保存,确认返回？")) return false;
-            <g:if test="opportunity!=null">
+            <g:if test="${entrance=='Opportunity'}">
             location="<g:createLink action='viewOpportunity' id='${opportunity.id}'/>";
             </g:if>
             <g:else>

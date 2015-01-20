@@ -81,10 +81,11 @@ $(document).ready(function(){
   	    </table>
  	</div>
  	
+        <g:if test="${opportunities!=null}">
  	<div id="listOpportunities">
         <g:render template="listOpportunities" model="[opportunities:opportunities]" />
  	</div>
- 	
+ 	</g:if>
   </div>
 </body>
 </html>

@@ -20,7 +20,7 @@
 					<td>
 						${i+1}
 					</td>
-					<td><g:link controller="activity" action="viewActivity" id="${activity.id}">
+					<td><g:link action="viewActivity" id="${activity.id}">
 							${activity.summary?.encodeAsHTML()}
 						</g:link></td>
 					<td><g:link controller="customer" action="viewCustomer"

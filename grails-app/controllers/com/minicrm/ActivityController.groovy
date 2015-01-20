@@ -25,58 +25,46 @@ class ActivityController {
         } else if(!customerService.checkAccessable(activity.customer)) {
             redirect(controller:"errorHandler", action:"showNoAccessable")
         } else {
-			def opportunities = OpportunityActivity.findAllByActivity(activity).collect{ it.opportunity }
+            def opportunities = OpportunityActivity.findAllByActivity(activity).collect{ it.opportunity }
             render(view:"viewActivity", model:[activity:activity, opportunities:opportunities])
         }
     }
 	
     def addActivity() {
-        render(view:"editActivity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD])
+        render(view:"editActivity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD, entrance:"Activity"])
     }
 
     def updateActivity() {
         def activity = Activity.load(params.id)
+        def opportunity = OpportunityActivity.findByActivity(activity)
         
         if(activity == null) {
             redirect(controller:"errorHandler", action:"showObjectNotFound")
         } else if(!customerService.checkAccessable(activity.customer)) {
             redirect(controller:"errorHandler", action:"showNoAccessable")
         } else {
-            render(view:"editActivity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE,
-                    activity:activity])
+            render(view:"editActivity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE, entrance:"Activity",
+                                                            opportunity:opportunity, activity:activity])
         }
     }
 
     def saveActivity() {
         def activity
-		def opportunity
         if (params.actionFlag == ConstUtils.CONTROLLER_ACTION_FLAG_ADD) {
             activity = new Activity(params)
-            def customer = Customer.get(params.customerId)
-			opportunity = Opportunity.get(params.opportunityId)
-            activity.customer = customer
+            activity.customer = Customer.get(params.customerId)
             activity.createdDate = new Date()
             activity.createUser = springSecurityService.currentUser
-            activity.lastUpdatedDate = new Date()
-            activity.lastUpdateUser = springSecurityService.currentUser
         } else if (params.actionFlag == ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE) {
             activity = Activity.load(params.id)
             activity.properties = params
-            activity.lastUpdatedDate = new Date()
-            activity.lastUpdateUser = springSecurityService.currentUser
         }
 
-        if (activity.save(flush:true)) {
-			if(opportunity != null) {
-				OpportunityActivity.create(opportunity, activity)
-				redirect(controller:"opportunity", action:"viewOpportunity", id:opportunity.id)
-			} else {
-				redirect(action:"listActivities")
-			}
-            
+        if (activityService.saveActivity(activity)) {
+            redirect(action:"listActivities")
         } else {
-            render(view:"editActivity", model:[actionFlag:params.actionFlag,
-                    activity:activity])
+            render(view:"editActivity", model:[actionFlag:params.actionFlag, entrance:"Activity",
+                                                    activity:activity])
         }
     }
 	

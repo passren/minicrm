@@ -4,6 +4,7 @@ class OpportunityController {
 
     def springSecurityService
     def opportunityService
+    def activityService
     def customerService
     
     def index() {
@@ -24,7 +25,7 @@ class OpportunityController {
         } else if(!customerService.checkAccessable(opportunity.customer)) {
             redirect(controller:"errorHandler", action:"showNoAccessable")
         } else {
-			def activities = OpportunityActivity.findAllByOpportunity(opportunity).collect{ it.activity }
+            def activities = OpportunityActivity.findAllByOpportunity(opportunity).collect{ it.activity }
             render(view:"viewOpportunity", model:[opportunity:opportunity, activities:activities])
         }
     }
@@ -75,23 +76,72 @@ class OpportunityController {
                     opportunity:opportunity])
         }
     }
+    
+    def viewActivity() {
+        def activity = Activity.read(params.id)
+        def opportunity = OpportunityActivity.findByActivity(activity)
+
+        if(activity == null) {
+            redirect(controller:"errorHandler", action:"showObjectNotFound")
+        } else if(!customerService.checkAccessable(activity.customer)) {
+            redirect(controller:"errorHandler", action:"showNoAccessable")
+        } else {
+            render(view:"../activity/viewActivity", model:[activity:activity])
+        }
+    }
 	
-	def addActivity() {
-		def opportunity = Opportunity.read(params.id)
-		render(view:"../activity/editActivity", model:[opportunity:opportunity, actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD])
-	}
-	
-	def updateActivity() {
-		
-	}
-	
-	def deleteActivity() {
-		
-	}
-	
-	def saveActivity() {
-		
-	}
+    def addActivity() {
+            def opportunity = Opportunity.read(params.id)
+            render(view:"../activity/editActivity", model:[opportunity:opportunity, actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_ADD, entrance:"Opportunity"])
+    }
+
+    def updateActivity() {
+        def activity = Activity.load(params.id)
+        def oa = OpportunityActivity.findByActivity(activity)
+        
+        if(activity == null) {
+            redirect(controller:"errorHandler", action:"showObjectNotFound")
+        } else if(!customerService.checkAccessable(activity.customer)) {
+            redirect(controller:"errorHandler", action:"showNoAccessable")
+        } else {
+            render(view:"../activity/editActivity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE, entrance:"Opportunity",
+                                                                    opportunity:oa.opportunity, activity:activity])
+        }
+    }
+
+    def deleteActivity() {
+        def activity = Activity.load(params.id)
+        
+        if(activity == null) {
+            redirect(controller:"errorHandler", action:"showObjectNotFound")
+        } else if(!customerService.checkAccessable(activity.customer)) {
+            redirect(controller:"errorHandler", action:"showNoAccessable")
+        } else {
+            activityService.deleteActivity(activity)
+            redirect(action:"listActivities")
+        }
+    }
+
+    def saveActivity() {
+        def activity
+        if (params.actionFlag == ConstUtils.CONTROLLER_ACTION_FLAG_ADD) {
+            activity = new Activity(params)
+            activity.customer = Customer.get(params.customerId)
+            activity.createdDate = new Date()
+            activity.createUser = springSecurityService.currentUser
+        } else if (params.actionFlag == ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE) {
+            activity = Activity.load(params.id)
+            activity.properties = params
+        }
+
+        def opportunity = Opportunity.get(params.opportunityId)
+        if (activityService.saveActivity(activity, opportunity)) {
+            redirect(controller:"opportunity", action:"viewOpportunity", id:opportunity.id)
+        } else {
+            render(view:"../activity/editActivity", model:[actionFlag:params.actionFlag, entrance:"Opportunity",
+                                                        opportunity:opportunity, activity:activity])
+        }
+    }
 	
     def viewReceivable() {
         def receivable = Receivable.read(params.id)
