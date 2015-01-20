@@ -18,7 +18,13 @@ $(document).ready(function(){
 <body>
   <div class="body">
 	<div class="toolbar">
+	        <g:if test="${entrance=='Opportunity'}">
+            <g:link controller="opportunity" action="viewOpportunity" id="${opportunity.id}">返回</g:link>
+            </g:if>
+            <g:else>
             <g:link action="listActivities">返回</g:link>
+            </g:else>
+            
             <g:link action="updateActivity" id="${activity.id}">更新活动</g:link>
             <a id=linkDeleteActivity href="#">删除活动</a>
 	</div>
@@ -81,9 +87,9 @@ $(document).ready(function(){
   	    </table>
  	</div>
  	
-        <g:if test="${opportunities!=null}">
+    <g:if test="${opportunity!=null}">
  	<div id="listOpportunities">
-        <g:render template="listOpportunities" model="[opportunities:opportunities]" />
+        <g:render template="../activity/listOpportunities" model="[opportunity:opportunity]" />
  	</div>
  	</g:if>
   </div>

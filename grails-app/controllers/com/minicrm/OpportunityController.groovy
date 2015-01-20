@@ -25,7 +25,7 @@ class OpportunityController {
         } else if(!customerService.checkAccessable(opportunity.customer)) {
             redirect(controller:"errorHandler", action:"showNoAccessable")
         } else {
-            def activities = OpportunityActivity.findAllByOpportunity(opportunity).collect{ it.activity }
+            def activities = OpportunityActivity.findAllByOpportunity(opportunity, [sort: "activity.lastUpdatedDate", order: "desc"]).collect{ it.activity }
             render(view:"viewOpportunity", model:[opportunity:opportunity, activities:activities])
         }
     }
@@ -79,14 +79,14 @@ class OpportunityController {
     
     def viewActivity() {
         def activity = Activity.read(params.id)
-        def opportunity = OpportunityActivity.findByActivity(activity)
+        def oa = OpportunityActivity.findByActivity(activity)
 
         if(activity == null) {
             redirect(controller:"errorHandler", action:"showObjectNotFound")
         } else if(!customerService.checkAccessable(activity.customer)) {
             redirect(controller:"errorHandler", action:"showNoAccessable")
         } else {
-            render(view:"../activity/viewActivity", model:[activity:activity])
+            render(view:"../activity/viewActivity", model:[opportunity:oa.opportunity, activity:activity, entrance:"Opportunity"])
         }
     }
 	
@@ -111,31 +111,36 @@ class OpportunityController {
 
     def deleteActivity() {
         def activity = Activity.load(params.id)
-        
+		def oa = OpportunityActivity.findByActivity(activity)
+		def opportunityId = oa.opportunity.id
+		
         if(activity == null) {
             redirect(controller:"errorHandler", action:"showObjectNotFound")
         } else if(!customerService.checkAccessable(activity.customer)) {
             redirect(controller:"errorHandler", action:"showNoAccessable")
         } else {
             activityService.deleteActivity(activity)
-            redirect(action:"listActivities")
+            redirect(action:"viewOpportunity", id:opportunityId)
         }
     }
 
     def saveActivity() {
         def activity
+		def success
+		def opportunity= Opportunity.get(params.opportunityId)
         if (params.actionFlag == ConstUtils.CONTROLLER_ACTION_FLAG_ADD) {
             activity = new Activity(params)
             activity.customer = Customer.get(params.customerId)
             activity.createdDate = new Date()
             activity.createUser = springSecurityService.currentUser
+			success = activityService.saveActivity(activity, opportunity)
         } else if (params.actionFlag == ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE) {
             activity = Activity.load(params.id)
             activity.properties = params
+			success = activityService.saveActivity(activity)
         }
 
-        def opportunity = Opportunity.get(params.opportunityId)
-        if (activityService.saveActivity(activity, opportunity)) {
+        if (success) {
             redirect(controller:"opportunity", action:"viewOpportunity", id:opportunity.id)
         } else {
             render(view:"../activity/editActivity", model:[actionFlag:params.actionFlag, entrance:"Opportunity",

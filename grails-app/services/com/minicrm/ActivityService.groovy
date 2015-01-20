@@ -80,13 +80,10 @@ class ActivityService {
     def deleteActivity(Activity activity) {
         if(activity==null) return false
         
-        def success = false
-        if(activity.delete()) {
-            OpportunityActivity.removeAll(activity)
-            Activity.withSession { it.flush() }
-            success = true
-        }
+		OpportunityActivity.removeAll(activity)
+		activity.delete()
+        Activity.withSession { it.flush() }
         
-        success
+        true
     }
 }

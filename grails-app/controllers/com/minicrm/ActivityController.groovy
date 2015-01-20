@@ -19,14 +19,13 @@ class ActivityController {
 
     def viewActivity() {
         def activity = Activity.read(params.id)
-
         if(activity == null) {
             redirect(controller:"errorHandler", action:"showObjectNotFound")
         } else if(!customerService.checkAccessable(activity.customer)) {
             redirect(controller:"errorHandler", action:"showNoAccessable")
         } else {
-            def opportunities = OpportunityActivity.findAllByActivity(activity).collect{ it.opportunity }
-            render(view:"viewActivity", model:[activity:activity, opportunities:opportunities])
+			def oa = OpportunityActivity.findByActivity(activity)
+            render(view:"viewActivity", model:[activity:activity, opportunity:oa?.opportunity])
         }
     }
 	
@@ -36,7 +35,7 @@ class ActivityController {
 
     def updateActivity() {
         def activity = Activity.load(params.id)
-        def opportunity = OpportunityActivity.findByActivity(activity)
+        def oa = OpportunityActivity.findByActivity(activity)
         
         if(activity == null) {
             redirect(controller:"errorHandler", action:"showObjectNotFound")
@@ -44,7 +43,7 @@ class ActivityController {
             redirect(controller:"errorHandler", action:"showNoAccessable")
         } else {
             render(view:"editActivity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE, entrance:"Activity",
-                                                            opportunity:opportunity, activity:activity])
+                                                            opportunity:oa.opportunity, activity:activity])
         }
     }
 
