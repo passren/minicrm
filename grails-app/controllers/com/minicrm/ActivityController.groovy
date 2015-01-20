@@ -43,7 +43,7 @@ class ActivityController {
             redirect(controller:"errorHandler", action:"showNoAccessable")
         } else {
             render(view:"editActivity", model:[actionFlag:ConstUtils.CONTROLLER_ACTION_FLAG_UPDATE, entrance:"Activity",
-                                                            opportunity:oa.opportunity, activity:activity])
+                                                            opportunity:oa?.opportunity, activity:activity])
         }
     }
 
