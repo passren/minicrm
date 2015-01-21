@@ -8,14 +8,14 @@ class CustomerService {
     def springSecurityService
     def adminService
 
-    def Set<Customer> findCustomerByCriteria(Map criteriaMap, boolean restricted=true) {
+    def findCustomerByCriteria(Map criteriaMap, boolean restricted=true) {
         def criteria = Customer.createCriteria()
         def user = springSecurityService.currentUser
         if(restricted) {
 			restricted = !adminService.hasFullCustomerAccess(user)
         }
 		
-        return criteria {
+        return criteria.list(max: criteriaMap.max, offset: criteriaMap.offset) {
             if(restricted) {
                 if(user!=null && user.person != null 
                     && user.person.customers.size()>0 ) {

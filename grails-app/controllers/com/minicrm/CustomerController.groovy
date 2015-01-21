@@ -14,7 +14,7 @@ class CustomerController {
     }
 
     def listCustomers() {
-        def searchCriteria = ControllerUtils.buildSearchCriteria(params)
+        def searchCriteria = ControllerUtils.buildSearchCriteria(params, true)
         def customers = customerService.findCustomerByCriteria(searchCriteria)
         render(view:"listCustomers", model:[customers:customers,
                 searchCriteria:searchCriteria])

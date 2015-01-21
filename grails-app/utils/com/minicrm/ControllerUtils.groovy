@@ -11,7 +11,7 @@ import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
  */
 class ControllerUtils {
 
-	static def buildSearchCriteria(GrailsParameterMap paramsMap) {
+	static def buildSearchCriteria(GrailsParameterMap paramsMap, boolean pagination=false) {
 		def searchCriteria = [:]
 		paramsMap.each {
 			if(it.key.startsWith("search_")) {
@@ -20,6 +20,11 @@ class ControllerUtils {
 			if(it.key in ["sort", "order"]) {
 				searchCriteria.put(it.key, it.value)
 			}
+		}
+		
+		if(pagination) {
+			searchCriteria.put("offset", paramsMap.offset)
+			searchCriteria.put("max", ConstUtils.PAGE_MAX_RECORDS)
 		}
 		
 		return searchCriteria

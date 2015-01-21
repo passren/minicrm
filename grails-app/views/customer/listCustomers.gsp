@@ -35,7 +35,7 @@ $(document).ready(function(){
     
     <div class="body">
   	<div class="search">
-            <g:form name="formSearch" method="post" action="listCustomers">
+            <g:form name="formSearch" method="get" action="listCustomers">
             <table>
                 <thead>
                 </thead>
@@ -135,7 +135,10 @@ $(document).ready(function(){
   	</div>
   	
 	<div class="paginate">
-	  <span>记录数: ${customers.size()}</span>
+	  <g:paginate controller="customer" action="listCustomers" total="${customers.totalCount}"
+	               params="${searchCriteria}"
+	               next="&gt;" prev="&lt;" max="${com.minicrm.ConstUtils.PAGE_MAX_RECORDS}"/>
+	  <span>总记录数: ${customers.totalCount}</span>
 	</div>
   </div>
 </body>
