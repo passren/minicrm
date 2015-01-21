@@ -10,14 +10,14 @@ class OpportunityService {
     def springSecurityService
     def adminService
 	
-    def Set<Customer> findOpportunityByCriteria(Map criteriaMap, boolean restricted=true) {
+    def findOpportunityByCriteria(Map criteriaMap, boolean restricted=true) {
         def criteria = Opportunity.createCriteria()
         def user = springSecurityService.currentUser
 		if(restricted) {
 			restricted = !adminService.hasFullCustomerAccess(user)
 		}
 		
-        return criteria {
+        return criteria.list(max: criteriaMap.max, offset: criteriaMap.offset) {
             if(restricted) {
                 customer {
                     if(user!=null && user.person != null

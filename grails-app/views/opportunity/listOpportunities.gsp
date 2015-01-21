@@ -106,7 +106,10 @@
             </div>
 
             <div class="paginate">
-                <span>记录数: ${opportunities.size()}</span>
+		      <g:paginate controller="Opportunity" action="listOpportunities" total="${opportunities.totalCount}"
+		                   params="${searchCriteria}"
+		                   next="&gt;" prev="&lt;" max="${com.minicrm.ConstUtils.PAGE_MAX_RECORDS}"/>
+		      <span>总记录数: ${opportunities.totalCount}</span>
             </div>
         </div>
     </body>

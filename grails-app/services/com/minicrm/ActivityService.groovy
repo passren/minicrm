@@ -11,14 +11,14 @@ class ActivityService {
     def springSecurityService
     def adminService
 	
-    def Set<Activity> findActivityByCriteria(Map criteriaMap, boolean restricted=true) {
+    def findActivityByCriteria(Map criteriaMap, boolean restricted=true) {
         def criteria = Activity.createCriteria()
         def user = springSecurityService.currentUser
 		if(restricted) {
 			restricted = !adminService.hasFullCustomerAccess(user)
 		}
 		
-        return criteria {
+        return criteria.list(max: criteriaMap.max, offset: criteriaMap.offset) {
             if(restricted) {
                 customer {
                     if(user!=null && user.person != null

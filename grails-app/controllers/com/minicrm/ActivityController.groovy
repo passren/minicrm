@@ -11,7 +11,7 @@ class ActivityController {
     }
 	
     def listActivities() {
-        def searchCriteria = ControllerUtils.buildSearchCriteria(params)
+        def searchCriteria = ControllerUtils.buildSearchCriteria(params, true)
         def activities = activityService.findActivityByCriteria(searchCriteria)
         render(view:"listActivities", model:[activities:activities,
                 searchCriteria:searchCriteria])

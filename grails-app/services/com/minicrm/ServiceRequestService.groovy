@@ -11,14 +11,14 @@ class ServiceRequestService {
     def springSecurityService
     def adminService
 	
-    def Set<ServiceRequest> findServiceRequestByCriteria(Map criteriaMap, boolean restricted=true) {
+    def findServiceRequestByCriteria(Map criteriaMap, boolean restricted=true) {
         def criteria = ServiceRequest.createCriteria()
         def user = springSecurityService.currentUser
 		if(restricted) {
 			restricted = !adminService.hasFullCustomerAccess(user)
 		}
 		
-        return criteria {
+        return criteria.list(max: criteriaMap.max, offset: criteriaMap.offset) {
             if(restricted) {
                 customer {
                     if(user!=null && user.person != null

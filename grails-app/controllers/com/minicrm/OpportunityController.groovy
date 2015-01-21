@@ -12,7 +12,7 @@ class OpportunityController {
     }
     
     def listOpportunities() {
-        def searchCriteria = ControllerUtils.buildSearchCriteria(params)
+        def searchCriteria = ControllerUtils.buildSearchCriteria(params, true)
         def opportunities = opportunityService.findOpportunityByCriteria(searchCriteria)
         render(view:"listOpportunities", model:[opportunities:opportunities,
                 searchCriteria:searchCriteria])

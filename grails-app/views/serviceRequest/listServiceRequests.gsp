@@ -107,7 +107,10 @@ $(document).ready(function(){
     </div>
 
     <div class="paginate">
-        <span>记录数: ${serviceRequests.size()}</span>
+      <g:paginate controller="serviceRequest" action="listServiceRequests" total="${serviceRequests.totalCount}"
+                   params="${searchCriteria}"
+                   next="&gt;" prev="&lt;" max="${com.minicrm.ConstUtils.PAGE_MAX_RECORDS}"/>
+      <span>总记录数: ${serviceRequests.totalCount}</span>
     </div>
   </div>
 </body>

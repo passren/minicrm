@@ -11,7 +11,7 @@ class ServiceRequestController {
     }
 
     def listServiceRequests() {
-        def searchCriteria = ControllerUtils.buildSearchCriteria(params)
+        def searchCriteria = ControllerUtils.buildSearchCriteria(params, true)
         def serviceRequests = serviceRequestService.findServiceRequestByCriteria(searchCriteria)
         render(view:"listServiceRequests", model:[serviceRequests:serviceRequests,
                 searchCriteria:searchCriteria])

@@ -56,7 +56,7 @@
         <g:layoutBody/>
     </div>
 
-    <div class="footer" role="contentinfo"><a>miniCRM v<g:meta name="app.version"/> (Base on Grails<g:meta name="app.grails.version"/>)</a></div>
+    <div class="footer" role="contentinfo"><a>miniCRM v<g:meta name="app.version"/> ${grails.util.Environment.current=="PRODUCTION"?"":grails.util.Environment.current} (Base on Grails<g:meta name="app.grails.version"/>)</a></div>
     <div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 </body>
 </html>
