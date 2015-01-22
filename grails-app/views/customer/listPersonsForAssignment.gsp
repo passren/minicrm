@@ -51,7 +51,9 @@
             </table>
         </div>
         <div class="paginate">
-            <span>记录数: ${persons?.size()}</span>
+          <g:paginate controller="customer" action="listPersonsForAssignment" total="${persons?persons.totalCount:0}"
+                       next="&gt;" prev="&lt;" />
+          <span>总记录数: ${persons?persons.totalCount:0}</span>
         </div>
     </body>
 </html>

@@ -156,6 +156,7 @@ class CustomerController {
     }
     
     def listPersonsForAssignment() {
+        params.max = ConstUtils.PAGE_MAX_RECORDS
         def persons = personService.getStaffofManager(springSecurityService.currentUser, params)
         render(view:"listPersonsForAssignment", model:[persons:persons])
     }

@@ -12,8 +12,9 @@ class PersonService {
 			if (adminService.isGeneralManagerRole()) {
 				return Person.list(params)
 			} else {
-				return Person.findAll(params) {
-					supervisor == manager.person
+				def criteria = Person.createCriteria()
+				return criteria.list(params) {
+					eq("supervisor", manager.person)
 				}
 			}
 		}
