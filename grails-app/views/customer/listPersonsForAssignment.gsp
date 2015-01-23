@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%
+  def pageOffset = params.offset?params.int("offset"):0
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -7,6 +10,10 @@
         <script type="text/javascript" class="init">
             $(document).ready(function() {
             //$('#userList').DataTable();
+
+            $("#maxPageSize").change(function(){
+                location = "<g:createLink controller="customer" action='listPersonsForAssignment' />?max="+$("#maxPageSize").val();
+            });
             } );
         </script>
 
@@ -35,7 +42,7 @@
                 <tbody>
                     <g:each in="${persons}" status="i" var="person">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                            <td>${i+1}</td>
+                            <td>${pageOffset+i+1}</td>
                             <td><g:link action="assginCustomerForPerson" id="${person.id}">${person.name?.encodeAsHTML()}</g:link></td>
                             <td>${person.customers.size()}</td>
                             <td>${person.jobnumber?.encodeAsHTML()}</td>
@@ -53,6 +60,13 @@
         <div class="paginate">
           <g:paginate controller="customer" action="listPersonsForAssignment" total="${persons?persons.totalCount:0}"
                        next="&gt;" prev="&lt;" />
+            <span>
+              <g:if test="${persons!=null && persons.totalCount>0}">
+                <g:select name="maxPageSize"
+                                  from="${[5, 10, 20, 50, 100]}"
+                                  value="${params.max}"/>
+              </g:if>
+            </span>
           <span>总记录数: ${persons?persons.totalCount:0}</span>
         </div>
     </body>

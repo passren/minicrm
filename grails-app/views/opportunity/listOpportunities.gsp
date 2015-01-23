@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
     def valueSetService = grailsApplication.mainContext.getBean("valueSetService");
+    def pageOffset = params.offset?params.int("offset"):0
 %>
 
 <html>
@@ -15,6 +16,11 @@
                         $("#search_opportunity_customer_name").val("");
                         $("#search_opportunity_status").val("");
                         $("#search_opportunity_product").val("");
+                });
+
+                $("#maxPageSize").change(function(){
+                    $("#max").val($("#maxPageSize").val());
+                    $("#formSearch").submit();
                 });
         });
         </script>
@@ -32,6 +38,7 @@
         <div class="body">
             <div class="search">
                 <g:form name="formSearch" method="post" action="listOpportunities">
+                <input type="hidden" id="max" name="max" value="${searchCriteria.max}"/>
                 <table>
                     <thead>
                     </thead>
@@ -88,7 +95,7 @@
                 <tbody>
                     <g:each in="${opportunities}" status="i" var="opportunity">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                            <td>${i+1}</td>
+                            <td>${pageOffset+i+1}</td>
                             <td>${opportunity.status?.code1}</td>
                             <td><g:link action="viewOpportunity" id="${opportunity.id}">${opportunity.product?.code1}</g:link></td>
                             <td>${opportunity.possibility}%</td>
@@ -106,10 +113,17 @@
             </div>
 
             <div class="paginate">
-		      <g:paginate controller="Opportunity" action="listOpportunities" total="${opportunities.totalCount}"
+		      <g:paginate controller="Opportunity" action="listOpportunities" total="${opportunities?.totalCount}"
 		                   params="${searchCriteria}"
-		                   next="&gt;" prev="&lt;" max="${com.minicrm.ConstUtils.PAGE_MAX_RECORDS}"/>
-		      <span>总记录数: ${opportunities.totalCount}</span>
+		                   next="&gt;" prev="&lt;" max="${searchCriteria.max}"/>
+                <span>
+                  <g:if test="${opportunities!=null && opportunities.totalCount>0}">
+                    <g:select name="maxPageSize"
+                                      from="${[5, 10, 20, 50, 100]}"
+                                      value="${searchCriteria.max}"/>
+                  </g:if>
+                </span>
+		      <span>总记录数: ${opportunities?.totalCount}</span>
             </div>
         </div>
     </body>

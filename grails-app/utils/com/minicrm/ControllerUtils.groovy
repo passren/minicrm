@@ -24,7 +24,7 @@ class ControllerUtils {
 		
 		if(pagination) {
 			searchCriteria.put("offset", paramsMap.offset)
-			searchCriteria.put("max", ConstUtils.PAGE_MAX_RECORDS)
+			paramsMap.max!=null?searchCriteria.put("max", paramsMap.max):searchCriteria.put("max", ConstUtils.PAGE_MAX_RECORDS)
 		}
 		
 		return searchCriteria

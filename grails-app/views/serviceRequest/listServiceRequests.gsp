@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
     def valueSetService = grailsApplication.mainContext.getBean("valueSetService");
+    def pageOffset = params.offset?params.int("offset"):0
 %>
 
 <html>
@@ -17,6 +18,11 @@ $(document).ready(function(){
 		$("#search_sr_status").val("");
 		$("#search_sr_maintainer").val("");
 	});
+
+  $("#maxPageSize").change(function(){
+      $("#max").val($("#maxPageSize").val());
+      $("#formSearch").submit();
+  });
 });
 </script>
 
@@ -34,6 +40,7 @@ $(document).ready(function(){
   <div class="body">
     <div class="search">
         <g:form name="formSearch" method="post" action="listServiceRequests">
+        <input type="hidden" id="max" name="max" value="${searchCriteria.max}"/>
         <table>
             <thead>
             </thead>
@@ -91,7 +98,7 @@ $(document).ready(function(){
         <tbody>
             <g:each in="${serviceRequests}" status="i" var="serviceRequest">
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                    <td>${i+1}</td>
+                    <td>${pageOffset+i+1}</td>
                     <td><g:link action="viewServiceRequest" id="${serviceRequest.id}">${serviceRequest.name?.encodeAsHTML()}</g:link></td>
                     <td><g:link controller="customer" action="viewCustomer" id="${serviceRequest.customer.id}">${serviceRequest.customer.name?.encodeAsHTML()}</g:link></td>
                     <td>${serviceRequest.classification?.code1}</td>
@@ -107,10 +114,17 @@ $(document).ready(function(){
     </div>
 
     <div class="paginate">
-      <g:paginate controller="serviceRequest" action="listServiceRequests" total="${serviceRequests.totalCount}"
+      <g:paginate controller="serviceRequest" action="listServiceRequests" total="${serviceRequests?.totalCount}"
                    params="${searchCriteria}"
-                   next="&gt;" prev="&lt;" max="${com.minicrm.ConstUtils.PAGE_MAX_RECORDS}"/>
-      <span>总记录数: ${serviceRequests.totalCount}</span>
+                   next="&gt;" prev="&lt;" max="${searchCriteria.max}"/>
+      <span>
+        <g:if test="${serviceRequests!=null && serviceRequests.totalCount>0}">
+          <g:select name="maxPageSize"
+                          from="${[5, 10, 20, 50, 100]}"
+                          value="${searchCriteria.max}"/>
+        </g:if>
+      </span>
+      <span>总记录数: ${serviceRequests?.totalCount}</span>
     </div>
   </div>
 </body>
