@@ -42,6 +42,12 @@
                 <li><asset:image src="link.gif" /> <g:link controller="customer" action="listPersonsForAssignment">客户分配</g:link></li>
             </sec:ifAnyGranted>
         </ul>
+        <sec:ifAnyGranted roles="${com.minicrm.ConstUtils.ROLE_GENERAL_MANAGER}">
+        <h1>统计报表</h1>
+        <ul>
+            <li><asset:image src="link.gif" /> <g:link controller="report" action="customerSummary">客户区域分布</g:link></li>
+        </ul>
+        </sec:ifAnyGranted>
         <sec:ifAnyGranted roles="${com.minicrm.ConstUtils.ROLE_ADMIN}">
             <h1>系统管理</h1>
             <ul>

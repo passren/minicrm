@@ -44,6 +44,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+        //mavenRepo "http://repo.grails.org/grails/core/"
     }
 
     dependencies {
@@ -61,7 +62,9 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
         compile ":asset-pipeline:1.9.9"
-		compile ":spring-security-core:2.0-RC4"
+        compile ":spring-security-core:2.0-RC4"
+        compile ":jquery-ui:1.10.4"
+        //compile ":jasper:1.10.0"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
@@ -69,7 +72,6 @@ grails.project.dependency.resolution = {
         runtime ":jquery:1.11.1"
 
         // Uncomment these to enable additional asset-pipeline capabilities
-        compile ":jquery-ui:1.10.4"
         //compile ":sass-asset-pipeline:1.9.0"
         //compile ":less-asset-pipeline:1.10.0"
         //compile ":coffee-asset-pipeline:1.8.0"
