@@ -144,11 +144,13 @@ grails {
 				'/login/**':          ['permitAll'],
 				'/logout/**':         ['permitAll'],
 				'/admin/**':          [com.minicrm.ConstUtils.ROLE_ADMIN],
-				'/customer/**':			['IS_AUTHENTICATED_REMEMBERED'],
-				'/activity/**':			['IS_AUTHENTICATED_REMEMBERED'],
-				'/opportunity/**':		['IS_AUTHENTICATED_REMEMBERED'],
-				'/serviceRequest/**':	['IS_AUTHENTICATED_REMEMBERED'],
-				'/errorHandler/**':		['IS_AUTHENTICATED_REMEMBERED']
+				'/customer/**':       ['IS_AUTHENTICATED_REMEMBERED'],
+				'/activity/**':       ['IS_AUTHENTICATED_REMEMBERED'],
+				'/opportunity/**':    ['IS_AUTHENTICATED_REMEMBERED'],
+				'/serviceRequest/**': ['IS_AUTHENTICATED_REMEMBERED'],
+				'/report/**':         ['IS_AUTHENTICATED_REMEMBERED'],
+				'/charts/**':         ['IS_AUTHENTICATED_REMEMBERED'],
+				'/errorHandler/**':   ['IS_AUTHENTICATED_REMEMBERED']
 			]
         }
     }
