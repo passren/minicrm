@@ -73,8 +73,11 @@ class ReportService {
     }
 	
 	def saveChartAsFile(imgFileName, chart, info) {
-		def chartImgFile = grailsApplication.parentContext.getResource("/" + 
-										ConstUtils.CHART_IMAGES_DIR + "/" + imgFileName).file
+		def chartImgDir = grailsApplication.parentContext.getResource(ConstUtils.CHART_IMAGES_DIR).file
+		if(!chartImgDir.exists()) {
+			chartImgDir.mkdir()
+		}
+		def chartImgFile = new File(chartImgDir.toString() + "/" + imgFileName)
 		ChartUtilities.saveChartAsPNG(chartImgFile, chart, 600, 300, info);
 		return chartImgFile.toString()
 	}
