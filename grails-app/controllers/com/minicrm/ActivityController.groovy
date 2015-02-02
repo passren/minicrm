@@ -74,7 +74,7 @@ class ActivityController {
         } else if(!customerService.checkAccessable(activity.customer)) {
             redirect(controller:"errorHandler", action:"showNoAccessable")
         } else {
-            activity.delete(flush:true)
+            activityService.deleteActivity(activity)
             redirect(action:"listActivities")
         }
     }
