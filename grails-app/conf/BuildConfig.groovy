@@ -1,3 +1,5 @@
+import grails.util.Environment
+
 grails.servlet.version = "3.0" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
@@ -5,16 +7,17 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
-environments {
-    development {
+
+switch (Environment.current) {
+    case Environment.DEVELOPMENT:
         grails.project.war.file = "target/minicrm-dev.war"
-    }
-    test {
+        break
+    case Environment.TEST:
         grails.project.war.file = "target/minicrm-test.war"
-    }
-    production {
+        break
+    case Environment.PRODUCTION:
         grails.project.war.file = "target/minicrm.war"
-    }
+        break
 }
 
 grails.project.fork = [
