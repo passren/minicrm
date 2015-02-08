@@ -126,7 +126,7 @@ $(document).ready(function(){
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">按住CTRL键可多选</td>
+                        <td colspan="2">输入%可以查询所有客户, 按住CTRL键可多选</td>
                     </tr>
                 </tbody>
             </table>

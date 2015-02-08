@@ -81,6 +81,9 @@ $(document).ready(function(){
 						<select name="selCustomers" id="selCustomers" size="10" style="width:350px;"></select>
 					</td>
 				</tr>
+				<tr>
+                    <td colspan="2">输入%可以查询所有客户</td>
+                </tr>
 			</tbody>
 		</table>
 	</div>
