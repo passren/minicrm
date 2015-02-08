@@ -1,3 +1,4 @@
+<%@ page import="grails.util.Environment" %>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -19,17 +20,25 @@
 </head>
 <body>
     <div id="banner" role="banner">
-        <div id="logo"><g:link controller="."><asset:image src="logo.png" alt="MiniCRM"/></g:link></div>
-            <div id="authority">
-                <sec:ifNotLoggedIn>
-                <g:link controller="login" action="auth">登陆</g:link>
-                </sec:ifNotLoggedIn>
+        <div id="logo">
+            <g:link controller="."><asset:image src="logo.png" alt="MiniCRM"/></g:link>
+            <g:if test="${Environment.current==Environment.DEVELOPMENT}">
+                <span>开发环境</span>
+            </g:if>
+            <g:if test="${Environment.current==Environment.TEST}">
+                <span>测试环境</span>
+            </g:if>
+        </div>
+        <div id="authority">
+            <sec:ifNotLoggedIn>
+            <g:link controller="login" action="auth">登陆</g:link>
+            </sec:ifNotLoggedIn>
 
             <sec:ifLoggedIn>
-                您好, <sec:username/>! <g:link uri="/logout">登出</g:link>
-                </sec:ifLoggedIn>
-            </div>
+            您好, <sec:username/>! <g:link uri="/logout">登出</g:link>
+            </sec:ifLoggedIn>
         </div>
+    </div>
 
     <div id="menu" role="complementary">
         <h1>销售跟踪</h1>
@@ -62,7 +71,10 @@
         <g:layoutBody/>
     </div>
 
-    <div class="footer" role="contentinfo"><a>miniCRM v<g:meta name="app.version"/> ${grails.util.Environment.current=="PRODUCTION"?"":grails.util.Environment.current} (Base on Grails<g:meta name="app.grails.version"/>)</a></div>
-    <div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
+    <div class="footer" role="contentinfo"><a>miniCRM v<g:meta name="app.version"/> 
+    (Base on Grails<g:meta name="app.grails.version"/>)</a></div>
+    <div id="spinner" class="spinner" style="display:none;">
+        <g:message code="spinner.alt" default="Loading&hellip;"/>
+    </div>
 </body>
 </html>
