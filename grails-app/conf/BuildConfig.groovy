@@ -5,7 +5,17 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
-//grails.project.war.file = "target/${appName}-${appVersion}.war"
+environments {
+    development {
+        grails.project.war.file = "target/minicrm-dev.war"
+    }
+    test {
+        grails.project.war.file = "target/minicrm-test.war"
+    }
+    production {
+        grails.project.war.file = "target/minicrm.war"
+    }
+}
 
 grails.project.fork = [
     // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
@@ -65,6 +75,7 @@ grails.project.dependency.resolution = {
         compile ":spring-security-core:2.0-RC4"
         compile ":jquery-ui:1.10.4"
         //compile ":jasper:1.10.0"
+		//compile ":export:1.6"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
