@@ -31,9 +31,10 @@ function searchCustomer(url) {
     }
 
     $.ajax({
-        type: "Get",
+        type: "POST",
         url: url,
-        data: "search_customer_name="+$("#search_customer_name").val(),
+        //data: "search_customer_name="+escape($("#search_customer_name").val()),
+        data: {search_customer_name:$("#search_customer_name").val()},
         success: function(data) {
             var obj = eval(data);
             $("#selCustomers").empty();
