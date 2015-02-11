@@ -10,13 +10,13 @@ grails.project.source.level = 1.6
 
 switch (Environment.current) {
     case Environment.DEVELOPMENT:
-        grails.project.war.file = "target/minicrm-dev.war"
+        grails.project.war.file = "target/spicrm-dev.war"
         break
     case Environment.TEST:
-        grails.project.war.file = "target/minicrm-test.war"
+        grails.project.war.file = "target/spicrm-test.war"
         break
     case Environment.PRODUCTION:
-        grails.project.war.file = "target/minicrm.war"
+        grails.project.war.file = "target/spicrm.war"
         break
 }
 
