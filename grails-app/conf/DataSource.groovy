@@ -63,20 +63,20 @@ environments {
         dataSource {
             dbCreate = "validate"
             pooled = true
-            url = "jdbc:mysql://127.0.0.1:3306/minicrm"
+            url = "jdbc:mysql://127.0.0.1:3306/minicrm?autoreconnect=true"
             driverClassName = "com.mysql.jdbc.Driver"
             dialect = org.hibernate.dialect.MySQL5InnoDBDialect
             username = "minicrm"
             password = "fdiur873"
             properties {
-                autoReconnect = true
-                maxActive = 50
-                maxIdle = 25
-                minIdle = 5
-                initialSize = 5
-                minEvictableIdleTimeMillis = 60000
-                timeBetweenEvictionRunsMillis = 60000
-                maxWait = 10000
+                maxActive = -1
+                minEvictableIdleTimeMillis=1800000
+                timeBetweenEvictionRunsMillis=1800000
+                numTestsPerEvictionRun=3
+                testOnBorrow=true
+                testWhileIdle=true
+                testOnReturn=true
+                validationQuery="SELECT 1"
             }
         }
     }
