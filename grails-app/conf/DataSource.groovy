@@ -69,6 +69,7 @@ environments {
             username = "minicrm"
             password = "fdiur873"
             properties {
+                autoReconnect = true
                 maxActive = 50
                 maxIdle = 25
                 minIdle = 5
